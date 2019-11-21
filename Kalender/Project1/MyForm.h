@@ -1,5 +1,6 @@
 #pragma once
 #include <ctime>
+#include <list>
 
 namespace Project1 {
 
@@ -19,6 +20,7 @@ namespace Project1 {
 	public:
 		MyForm(void)
 		{
+			
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
@@ -37,11 +39,10 @@ namespace Project1 {
 			}
 		}
 
-	private: System::Windows::Forms::MonthCalendar^  monthCalendar1;
+
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
-
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
 	private: System::Windows::Forms::ListBox^  listBox1;
@@ -56,7 +57,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Button^  button4;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Button^  button5;
-
+	private: System::Windows::Forms::BindingSource^ bindingSource;
 	private: System::Windows::Forms::TextBox^  textBox4;
 	private: System::Windows::Forms::TextBox^  textBox5;
 	private: System::Windows::Forms::Button^  button6;
@@ -69,6 +70,32 @@ namespace Project1 {
 	private: System::Windows::Forms::Label^  label3;
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::Label^  label5;
+	private: System::Windows::Forms::DataGridView^  dataGridView2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
+	private: System::Windows::Forms::DataGridViewButtonColumn^  Mandag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdah;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
+	private: System::ComponentModel::IContainer^  components;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	protected:
 
@@ -78,7 +105,7 @@ namespace Project1 {
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -87,7 +114,8 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->monthCalendar1 = (gcnew System::Windows::Forms::MonthCalendar());
+			this->components = (gcnew System::ComponentModel::Container());
+			this->bindingSource = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
@@ -117,27 +145,19 @@ namespace Project1 {
 			this->label3 = (gcnew System::Windows::Forms::Label());
 			this->label4 = (gcnew System::Windows::Forms::Label());
 			this->label5 = (gcnew System::Windows::Forms::Label());
+			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
+			this->Vecka = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Mandag = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
+			this->Tisdah = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Onsdag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Torsdag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Fredag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Lordag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Sondag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
-			// 
-			// monthCalendar1
-			// 
-			this->monthCalendar1->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(0)), static_cast<System::Int32>(static_cast<System::Byte>(192)),
-				static_cast<System::Int32>(static_cast<System::Byte>(192)));
-			this->monthCalendar1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 8, System::Drawing::FontStyle::Regular, System::Drawing::GraphicsUnit::Point,
-				static_cast<System::Byte>(0)));
-			this->monthCalendar1->ForeColor = System::Drawing::SystemColors::Desktop;
-			this->monthCalendar1->Location = System::Drawing::Point(692, 10);
-			this->monthCalendar1->Margin = System::Windows::Forms::Padding(10, 11, 10, 11);
-			this->monthCalendar1->MaxDate = System::DateTime(2019, 11, 30, 0, 0, 0, 0);
-			this->monthCalendar1->MinDate = System::DateTime(2019, 11, 1, 0, 0, 0, 0);
-			this->monthCalendar1->MinimumSize = System::Drawing::Size(2, 2);
-			this->monthCalendar1->Name = L"monthCalendar1";
-			this->monthCalendar1->ShowWeekNumbers = true;
-			this->monthCalendar1->TabIndex = 1;
-			this->monthCalendar1->TitleBackColor = System::Drawing::SystemColors::Desktop;
-			this->monthCalendar1->TitleForeColor = System::Drawing::SystemColors::Desktop;
-			this->monthCalendar1->TrailingForeColor = System::Drawing::SystemColors::Desktop;
 			// 
 			// textBox1
 			// 
@@ -210,7 +230,7 @@ namespace Project1 {
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::MenuHighlight;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) { this->Tid, this->Event });
-			this->dataGridView1->Location = System::Drawing::Point(1065, 12);
+			this->dataGridView1->Location = System::Drawing::Point(1514, 12);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowTemplate->Height = 28;
 			this->dataGridView1->Size = System::Drawing::Size(327, 903);
@@ -391,12 +411,94 @@ namespace Project1 {
 			this->label5->TabIndex = 30;
 			this->label5->Text = L"Redigera event";
 			// 
+			// dataGridView2
+			// 
+			this->dataGridView2->AllowUserToAddRows = false;
+			this->dataGridView2->AutoGenerateColumns = false;
+			this->dataGridView2->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
+				this->Vecka,
+					this->Mandag, this->Tisdah, this->Onsdag, this->Torsdag, this->Fredag, this->Lordag, this->Sondag
+			});
+			this->dataGridView2->DataSource = this->bindingSource;
+			this->dataGridView2->Location = System::Drawing::Point(652, 106);
+			this->dataGridView2->Name = L"dataGridView2";
+			this->dataGridView2->RowTemplate->Height = 28;
+			this->dataGridView2->Size = System::Drawing::Size(845, 538);
+			this->dataGridView2->TabIndex = 31;
+			// 
+			// Vecka
+			// 
+			this->Vecka->FillWeight = 40.60913F;
+			this->Vecka->HeaderText = L"";
+			this->Vecka->Name = L"Vecka";
+			this->Vecka->ReadOnly = true;
+			this->Vecka->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Mandag
+			// 
+			this->Mandag->FillWeight = 108.4844F;
+			this->Mandag->HeaderText = L"Mån";
+			this->Mandag->Name = L"Mandag";
+			this->Mandag->ReadOnly = true;
+			this->Mandag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Tisdah
+			// 
+			this->Tisdah->FillWeight = 108.4844F;
+			this->Tisdah->HeaderText = L"Tis";
+			this->Tisdah->Name = L"Tisdah";
+			this->Tisdah->ReadOnly = true;
+			this->Tisdah->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Onsdag
+			// 
+			this->Onsdag->FillWeight = 108.4844F;
+			this->Onsdag->HeaderText = L"Ons";
+			this->Onsdag->Name = L"Onsdag";
+			this->Onsdag->ReadOnly = true;
+			this->Onsdag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Torsdag
+			// 
+			this->Torsdag->FillWeight = 108.4844F;
+			this->Torsdag->HeaderText = L"Tor";
+			this->Torsdag->Name = L"Torsdag";
+			this->Torsdag->ReadOnly = true;
+			this->Torsdag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Fredag
+			// 
+			this->Fredag->FillWeight = 108.4844F;
+			this->Fredag->HeaderText = L"Fre";
+			this->Fredag->Name = L"Fredag";
+			this->Fredag->ReadOnly = true;
+			this->Fredag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Lordag
+			// 
+			this->Lordag->FillWeight = 108.4844F;
+			this->Lordag->HeaderText = L"Lör";
+			this->Lordag->Name = L"Lordag";
+			this->Lordag->ReadOnly = true;
+			this->Lordag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
+			// Sondag
+			// 
+			this->Sondag->FillWeight = 108.4844F;
+			this->Sondag->HeaderText = L"Sön";
+			this->Sondag->Name = L"Sondag";
+			this->Sondag->ReadOnly = true;
+			this->Sondag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1402, 927);
+			this->ClientSize = System::Drawing::Size(1866, 927);
+			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
 			this->Controls->Add(this->label3);
@@ -424,12 +526,13 @@ namespace Project1 {
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->textBox1);
-			this->Controls->Add(this->monthCalendar1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
 			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Name = L"MyForm";
 			this->Text = L"Best kalender EU";
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
@@ -441,6 +544,7 @@ namespace Project1 {
 
 	}
 	private: System::Void panel1_Paint(System::Object^  sender, System::Windows::Forms::PaintEventArgs^  e) {
+		
 	}
 
 };

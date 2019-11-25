@@ -1,6 +1,7 @@
 #pragma once
 #include <ctime>
 #include <list>
+#include <string>
 
 namespace Project1 {
 
@@ -22,9 +23,82 @@ namespace Project1 {
 		{
 			
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			try {
+				time_t curday = time(0);
+				tm *ltm = localtime(&curday);
+				int curWeekDay = ltm->tm_wday;
+				int curDay = ltm->tm_mday;
+				int daysofMonth = 0;
+				int curMonth = 1 + ltm->tm_mon;
+				int curYear = 1900+ltm->tm_year;
+				int curWeek = 2+ltm->tm_yday / 7;
+
+				while (true) {
+
+					if (curWeekDay == 1) {
+						curWeekDay = 8;
+						curWeek--;
+					}
+
+					if (curDay == 1) {
+
+						break;
+					}
+
+					curWeekDay--;
+					curDay--;
+				}
+
+				if (curMonth % 2 == 0 & curMonth != 2 || curMonth == 7) {
+					daysofMonth = 31;
+				}
+				else if (curMonth == 2 && curYear % 4 != 0) {
+					daysofMonth = 28;
+				}
+				else if (curMonth == 2 && curYear % 4 == 0) {
+					daysofMonth = 29;
+				}
+				else {
+					daysofMonth = 30;
+				}
+
+				int weekDays[7] = { 0,0,0,0,0,0,0 };
+
+				for (int i = 0; i < 7; i++) {
+
+					if (i+1 < curWeekDay) {
+						weekDays[i] = 0;
+					}
+					else {
+						weekDays[i] = curDay;
+						curDay++;
+					}
+				}
+
+				dataGridView2->Rows->Add(curWeek,weekDays[0], weekDays[1], weekDays[2], weekDays[3], weekDays[4], weekDays[5], weekDays[6]);
+
+				for (int i = 0; i < 4; i++) {
+					curWeek++;
+					for (int k = 0; k < 7; k++)
+						weekDays[k] = 0;
+
+					for (int j = 0; j < 7; j++) {
+
+						weekDays[j] = curDay;
+						
+						if (curDay == daysofMonth) {
+							break;
+						}
+						curDay++;
+					}
+					dataGridView2->Rows->Add(curWeek, weekDays[0], weekDays[1], weekDays[2], weekDays[3], weekDays[4], weekDays[5], weekDays[6]);
+					
+				}
+			}
+			catch (...) {
+				MessageBox::Show("Det blev fel");
+			};
+			
 		}
 
 	protected:
@@ -38,7 +112,6 @@ namespace Project1 {
 				delete components;
 			}
 		}
-
 
 	private: System::Windows::Forms::TextBox^  textBox1;
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
@@ -57,7 +130,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Button^  button4;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::Windows::Forms::Button^  button5;
-	private: System::Windows::Forms::BindingSource^ bindingSource;
+
 	private: System::Windows::Forms::TextBox^  textBox4;
 	private: System::Windows::Forms::TextBox^  textBox5;
 	private: System::Windows::Forms::Button^  button6;
@@ -71,30 +144,43 @@ namespace Project1 {
 	private: System::Windows::Forms::Label^  label4;
 	private: System::Windows::Forms::Label^  label5;
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
-	private: System::Windows::Forms::DataGridViewButtonColumn^  Mandag;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdah;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
+
+
+
+
+
+
+
+
+private: System::Windows::Forms::MenuStrip^  menuStrip1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
+private: System::Windows::Forms::Button^  button7;
+private: System::Windows::Forms::Button^  button8;
+private: System::Windows::Forms::Button^  button9;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	private: System::ComponentModel::IContainer^  components;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 	protected:
@@ -114,8 +200,6 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = (gcnew System::ComponentModel::Container());
-			this->bindingSource = (gcnew System::Windows::Forms::BindingSource(this->components));
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
@@ -147,45 +231,52 @@ namespace Project1 {
 			this->label5 = (gcnew System::Windows::Forms::Label());
 			this->dataGridView2 = (gcnew System::Windows::Forms::DataGridView());
 			this->Vecka = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->Mandag = (gcnew System::Windows::Forms::DataGridViewButtonColumn());
-			this->Tisdah = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Mandag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
+			this->Tisdag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Onsdag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Torsdag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Fredag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Lordag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Sondag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource))->BeginInit();
+			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->button8 = (gcnew System::Windows::Forms::Button());
+			this->button9 = (gcnew System::Windows::Forms::Button());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(5, 106);
+			this->textBox1->Location = System::Drawing::Point(3, 69);
+			this->textBox1->Margin = System::Windows::Forms::Padding(2);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(280, 26);
+			this->textBox1->Size = System::Drawing::Size(188, 20);
 			this->textBox1->TabIndex = 2;
 			this->textBox1->Text = L"Namn på event";
 			// 
 			// dateTimePicker1
 			// 
-			this->dateTimePicker1->Location = System::Drawing::Point(5, 196);
+			this->dateTimePicker1->Location = System::Drawing::Point(3, 127);
+			this->dateTimePicker1->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker1->Name = L"dateTimePicker1";
-			this->dateTimePicker1->Size = System::Drawing::Size(280, 26);
+			this->dateTimePicker1->Size = System::Drawing::Size(188, 20);
 			this->dateTimePicker1->TabIndex = 3;
 			// 
 			// dateTimePicker2
 			// 
-			this->dateTimePicker2->Location = System::Drawing::Point(5, 228);
+			this->dateTimePicker2->Location = System::Drawing::Point(3, 148);
+			this->dateTimePicker2->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker2->Name = L"dateTimePicker2";
-			this->dateTimePicker2->Size = System::Drawing::Size(280, 26);
+			this->dateTimePicker2->Size = System::Drawing::Size(188, 20);
 			this->dateTimePicker2->TabIndex = 4;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(5, 260);
+			this->button1->Location = System::Drawing::Point(3, 169);
+			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(280, 45);
+			this->button1->Size = System::Drawing::Size(187, 29);
 			this->button1->TabIndex = 6;
 			this->button1->Text = L"Skapa Event";
 			this->button1->UseVisualStyleBackColor = true;
@@ -194,33 +285,36 @@ namespace Project1 {
 			// comboBox1
 			// 
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Location = System::Drawing::Point(5, 593);
+			this->comboBox1->Location = System::Drawing::Point(3, 385);
+			this->comboBox1->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox1->Name = L"comboBox1";
-			this->comboBox1->Size = System::Drawing::Size(280, 28);
+			this->comboBox1->Size = System::Drawing::Size(188, 21);
 			this->comboBox1->TabIndex = 7;
 			// 
 			// listBox1
 			// 
 			this->listBox1->FormattingEnabled = true;
-			this->listBox1->ItemHeight = 20;
-			this->listBox1->Location = System::Drawing::Point(5, 627);
+			this->listBox1->Location = System::Drawing::Point(3, 408);
+			this->listBox1->Margin = System::Windows::Forms::Padding(2);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(280, 44);
+			this->listBox1->Size = System::Drawing::Size(188, 30);
 			this->listBox1->TabIndex = 8;
 			// 
 			// listView1
 			// 
-			this->listView1->Location = System::Drawing::Point(5, 677);
+			this->listView1->Location = System::Drawing::Point(3, 440);
+			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->Name = L"listView1";
-			this->listView1->Size = System::Drawing::Size(280, 78);
+			this->listView1->Size = System::Drawing::Size(188, 52);
 			this->listView1->TabIndex = 9;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(5, 761);
+			this->button2->Location = System::Drawing::Point(3, 495);
+			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(280, 45);
+			this->button2->Size = System::Drawing::Size(187, 29);
 			this->button2->TabIndex = 10;
 			this->button2->Text = L"Bjud in";
 			this->button2->UseVisualStyleBackColor = true;
@@ -230,10 +324,11 @@ namespace Project1 {
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::MenuHighlight;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) { this->Tid, this->Event });
-			this->dataGridView1->Location = System::Drawing::Point(1514, 12);
+			this->dataGridView1->Location = System::Drawing::Point(1009, 8);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowTemplate->Height = 28;
-			this->dataGridView1->Size = System::Drawing::Size(327, 903);
+			this->dataGridView1->Size = System::Drawing::Size(218, 587);
 			this->dataGridView1->TabIndex = 11;
 			// 
 			// Tid
@@ -251,16 +346,18 @@ namespace Project1 {
 			// comboBox2
 			// 
 			this->comboBox2->FormattingEnabled = true;
-			this->comboBox2->Location = System::Drawing::Point(5, 401);
+			this->comboBox2->Location = System::Drawing::Point(3, 261);
+			this->comboBox2->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox2->Name = L"comboBox2";
-			this->comboBox2->Size = System::Drawing::Size(280, 28);
+			this->comboBox2->Size = System::Drawing::Size(188, 21);
 			this->comboBox2->TabIndex = 12;
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(5, 435);
+			this->button3->Location = System::Drawing::Point(3, 283);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(280, 45);
+			this->button3->Size = System::Drawing::Size(187, 29);
 			this->button3->TabIndex = 13;
 			this->button3->Text = L"Ta bort Event";
 			this->button3->UseVisualStyleBackColor = true;
@@ -268,92 +365,103 @@ namespace Project1 {
 			// comboBox3
 			// 
 			this->comboBox3->FormattingEnabled = true;
-			this->comboBox3->Location = System::Drawing::Point(352, 452);
+			this->comboBox3->Location = System::Drawing::Point(235, 294);
+			this->comboBox3->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox3->Name = L"comboBox3";
-			this->comboBox3->Size = System::Drawing::Size(280, 28);
+			this->comboBox3->Size = System::Drawing::Size(188, 21);
 			this->comboBox3->TabIndex = 14;
 			// 
 			// button4
 			// 
-			this->button4->Location = System::Drawing::Point(352, 569);
+			this->button4->Location = System::Drawing::Point(235, 370);
+			this->button4->Margin = System::Windows::Forms::Padding(2);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(136, 45);
+			this->button4->Size = System::Drawing::Size(91, 29);
 			this->button4->TabIndex = 15;
 			this->button4->Text = L"Acceptera";
 			this->button4->UseVisualStyleBackColor = true;
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(352, 486);
+			this->textBox2->Location = System::Drawing::Point(235, 316);
+			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Multiline = true;
 			this->textBox2->Name = L"textBox2";
-			this->textBox2->Size = System::Drawing::Size(280, 77);
+			this->textBox2->Size = System::Drawing::Size(188, 51);
 			this->textBox2->TabIndex = 16;
 			// 
 			// button5
 			// 
-			this->button5->Location = System::Drawing::Point(494, 569);
+			this->button5->Location = System::Drawing::Point(329, 370);
+			this->button5->Margin = System::Windows::Forms::Padding(2);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(138, 45);
+			this->button5->Size = System::Drawing::Size(92, 29);
 			this->button5->TabIndex = 17;
 			this->button5->Text = L"Neka";
 			this->button5->UseVisualStyleBackColor = true;
 			// 
 			// textBox4
 			// 
-			this->textBox4->Location = System::Drawing::Point(5, 138);
+			this->textBox4->Location = System::Drawing::Point(3, 90);
+			this->textBox4->Margin = System::Windows::Forms::Padding(2);
 			this->textBox4->Multiline = true;
 			this->textBox4->Name = L"textBox4";
-			this->textBox4->Size = System::Drawing::Size(280, 52);
+			this->textBox4->Size = System::Drawing::Size(188, 35);
 			this->textBox4->TabIndex = 19;
 			this->textBox4->Text = L"Beskrivning";
 			// 
 			// textBox5
 			// 
-			this->textBox5->Location = System::Drawing::Point(352, 166);
+			this->textBox5->Location = System::Drawing::Point(235, 108);
+			this->textBox5->Margin = System::Windows::Forms::Padding(2);
 			this->textBox5->Multiline = true;
 			this->textBox5->Name = L"textBox5";
-			this->textBox5->Size = System::Drawing::Size(280, 56);
+			this->textBox5->Size = System::Drawing::Size(188, 38);
 			this->textBox5->TabIndex = 24;
 			this->textBox5->Text = L"Beskrivning";
 			// 
 			// button6
 			// 
-			this->button6->Location = System::Drawing::Point(352, 288);
+			this->button6->Location = System::Drawing::Point(235, 187);
+			this->button6->Margin = System::Windows::Forms::Padding(2);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(280, 49);
+			this->button6->Size = System::Drawing::Size(187, 32);
 			this->button6->TabIndex = 23;
 			this->button6->Text = L"Redigera Event";
 			this->button6->UseVisualStyleBackColor = true;
 			// 
 			// dateTimePicker3
 			// 
-			this->dateTimePicker3->Location = System::Drawing::Point(352, 260);
+			this->dateTimePicker3->Location = System::Drawing::Point(235, 169);
+			this->dateTimePicker3->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker3->Name = L"dateTimePicker3";
-			this->dateTimePicker3->Size = System::Drawing::Size(280, 26);
+			this->dateTimePicker3->Size = System::Drawing::Size(188, 20);
 			this->dateTimePicker3->TabIndex = 22;
 			// 
 			// dateTimePicker4
 			// 
-			this->dateTimePicker4->Location = System::Drawing::Point(352, 228);
+			this->dateTimePicker4->Location = System::Drawing::Point(235, 148);
+			this->dateTimePicker4->Margin = System::Windows::Forms::Padding(2);
 			this->dateTimePicker4->Name = L"dateTimePicker4";
-			this->dateTimePicker4->Size = System::Drawing::Size(280, 26);
+			this->dateTimePicker4->Size = System::Drawing::Size(188, 20);
 			this->dateTimePicker4->TabIndex = 21;
 			// 
 			// textBox6
 			// 
-			this->textBox6->Location = System::Drawing::Point(352, 138);
+			this->textBox6->Location = System::Drawing::Point(235, 90);
+			this->textBox6->Margin = System::Windows::Forms::Padding(2);
 			this->textBox6->Name = L"textBox6";
-			this->textBox6->Size = System::Drawing::Size(280, 26);
+			this->textBox6->Size = System::Drawing::Size(188, 20);
 			this->textBox6->TabIndex = 20;
 			this->textBox6->Text = L"Namn på event";
 			// 
 			// comboBox4
 			// 
 			this->comboBox4->FormattingEnabled = true;
-			this->comboBox4->Location = System::Drawing::Point(352, 104);
+			this->comboBox4->Location = System::Drawing::Point(235, 68);
+			this->comboBox4->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox4->Name = L"comboBox4";
-			this->comboBox4->Size = System::Drawing::Size(280, 28);
+			this->comboBox4->Size = System::Drawing::Size(188, 21);
 			this->comboBox4->TabIndex = 25;
 			// 
 			// label1
@@ -361,9 +469,10 @@ namespace Project1 {
 			this->label1->AutoSize = true;
 			this->label1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 17, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label1->Location = System::Drawing::Point(352, 401);
+			this->label1->Location = System::Drawing::Point(235, 261);
+			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(218, 39);
+			this->label1->Size = System::Drawing::Size(158, 29);
 			this->label1->TabIndex = 26;
 			this->label1->Text = L"Inbjudningar";
 			// 
@@ -372,9 +481,10 @@ namespace Project1 {
 			this->label2->AutoSize = true;
 			this->label2->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 17, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label2->Location = System::Drawing::Point(12, 540);
+			this->label2->Location = System::Drawing::Point(8, 351);
+			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(290, 39);
+			this->label2->Size = System::Drawing::Size(212, 29);
 			this->label2->TabIndex = 27;
 			this->label2->Text = L"Bjud in deltagare";
 			// 
@@ -383,9 +493,10 @@ namespace Project1 {
 			this->label3->AutoSize = true;
 			this->label3->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 17, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label3->Location = System::Drawing::Point(13, 352);
+			this->label3->Location = System::Drawing::Point(9, 229);
+			this->label3->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(229, 39);
+			this->label3->Size = System::Drawing::Size(167, 29);
 			this->label3->TabIndex = 28;
 			this->label3->Text = L"Ta bort event";
 			// 
@@ -394,9 +505,10 @@ namespace Project1 {
 			this->label4->AutoSize = true;
 			this->label4->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 17, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label4->Location = System::Drawing::Point(12, 59);
+			this->label4->Location = System::Drawing::Point(8, 38);
+			this->label4->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(217, 39);
+			this->label4->Size = System::Drawing::Size(156, 29);
 			this->label4->TabIndex = 29;
 			this->label4->Text = L"Skapa event";
 			// 
@@ -405,33 +517,35 @@ namespace Project1 {
 			this->label5->AutoSize = true;
 			this->label5->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->label5->Location = System::Drawing::Point(344, 52);
+			this->label5->Location = System::Drawing::Point(229, 34);
+			this->label5->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(302, 46);
+			this->label5->Size = System::Drawing::Size(212, 31);
 			this->label5->TabIndex = 30;
 			this->label5->Text = L"Redigera event";
 			// 
 			// dataGridView2
 			// 
 			this->dataGridView2->AllowUserToAddRows = false;
-			this->dataGridView2->AutoGenerateColumns = false;
 			this->dataGridView2->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView2->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView2->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(8) {
 				this->Vecka,
-					this->Mandag, this->Tisdah, this->Onsdag, this->Torsdag, this->Fredag, this->Lordag, this->Sondag
+					this->Mandag, this->Tisdag, this->Onsdag, this->Torsdag, this->Fredag, this->Lordag, this->Sondag
 			});
-			this->dataGridView2->DataSource = this->bindingSource;
-			this->dataGridView2->Location = System::Drawing::Point(652, 106);
+			this->dataGridView2->Location = System::Drawing::Point(435, 69);
+			this->dataGridView2->Margin = System::Windows::Forms::Padding(2);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowTemplate->Height = 28;
-			this->dataGridView2->Size = System::Drawing::Size(845, 538);
+			this->dataGridView2->RowTemplate->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->dataGridView2->Size = System::Drawing::Size(563, 350);
 			this->dataGridView2->TabIndex = 31;
+			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::selectDay);
 			// 
 			// Vecka
 			// 
 			this->Vecka->FillWeight = 40.60913F;
-			this->Vecka->HeaderText = L"";
+			this->Vecka->HeaderText = L"V";
 			this->Vecka->Name = L"Vecka";
 			this->Vecka->ReadOnly = true;
 			this->Vecka->Resizable = System::Windows::Forms::DataGridViewTriState::False;
@@ -443,14 +557,15 @@ namespace Project1 {
 			this->Mandag->Name = L"Mandag";
 			this->Mandag->ReadOnly = true;
 			this->Mandag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->Mandag->SortMode = System::Windows::Forms::DataGridViewColumnSortMode::NotSortable;
 			// 
-			// Tisdah
+			// Tisdag
 			// 
-			this->Tisdah->FillWeight = 108.4844F;
-			this->Tisdah->HeaderText = L"Tis";
-			this->Tisdah->Name = L"Tisdah";
-			this->Tisdah->ReadOnly = true;
-			this->Tisdah->Resizable = System::Windows::Forms::DataGridViewTriState::False;
+			this->Tisdag->FillWeight = 108.4844F;
+			this->Tisdag->HeaderText = L"Tis";
+			this->Tisdag->Name = L"Tisdag";
+			this->Tisdag->ReadOnly = true;
+			this->Tisdag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
 			// 
 			// Onsdag
 			// 
@@ -492,12 +607,50 @@ namespace Project1 {
 			this->Sondag->ReadOnly = true;
 			this->Sondag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
 			// 
+			// menuStrip1
+			// 
+			this->menuStrip1->Location = System::Drawing::Point(0, 0);
+			this->menuStrip1->Name = L"menuStrip1";
+			this->menuStrip1->Size = System::Drawing::Size(1244, 24);
+			this->menuStrip1->TabIndex = 32;
+			this->menuStrip1->Text = L"menuStrip1";
+			// 
+			// button7
+			// 
+			this->button7->Location = System::Drawing::Point(511, 424);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(138, 30);
+			this->button7->TabIndex = 33;
+			this->button7->Text = L"Föregående";
+			this->button7->UseVisualStyleBackColor = true;
+			// 
+			// button8
+			// 
+			this->button8->Location = System::Drawing::Point(655, 424);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(138, 30);
+			this->button8->TabIndex = 34;
+			this->button8->Text = L"Nuvarande";
+			this->button8->UseVisualStyleBackColor = true;
+			// 
+			// button9
+			// 
+			this->button9->Location = System::Drawing::Point(799, 424);
+			this->button9->Name = L"button9";
+			this->button9->Size = System::Drawing::Size(138, 30);
+			this->button9->TabIndex = 35;
+			this->button9->Text = L"Nästa";
+			this->button9->UseVisualStyleBackColor = true;
+			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(9, 20);
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1866, 927);
+			this->ClientSize = System::Drawing::Size(1244, 603);
+			this->Controls->Add(this->button9);
+			this->Controls->Add(this->button8);
+			this->Controls->Add(this->button7);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->label5);
 			this->Controls->Add(this->label4);
@@ -526,11 +679,12 @@ namespace Project1 {
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->textBox1);
+			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
+			this->MainMenuStrip = this->menuStrip1;
+			this->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
 			this->Name = L"MyForm";
 			this->Text = L"Best kalender EU";
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->bindingSource))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
@@ -547,5 +701,8 @@ namespace Project1 {
 		
 	}
 
+private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	MessageBox::Show("Häng dig");
+}
 };
 }

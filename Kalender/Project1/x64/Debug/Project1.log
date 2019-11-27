@@ -1,6 +1,7 @@
-﻿  MyForm.cpp
-c:\users\brandon.mogren\source\repos\kalender\kalender\project1\myform.h(52): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
-c:\users\brandon.mogren\source\repos\kalender\kalender\project1\myform.h(28): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: see declaration of 'localtime'
-  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  Project1.vcxproj -> C:\Users\brandon.mogren\source\repos\kalender\Kalender\x64\Debug\Project1.exe
+﻿  MyForm.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+MyForm.obj : error LNK2028: unresolved token (0A000A1B) "extern "C" void __cdecl curl_easy_cleanup(void *)" (?curl_easy_cleanup@@$$J0YAXPEAX@Z) referenced in function "void __clrcall Main(cli::array<System::PE$AAVString >^)" (?Main@@$$FYMXP$01EAPE$AAVString@System@@@Z)
+MyForm.obj : error LNK2028: unresolved token (0A000A81) "extern "C" void * __cdecl curl_easy_init(void)" (?curl_easy_init@@$$J0YAPEAXXZ) referenced in function "void __clrcall Main(cli::array<System::PE$AAVString >^)" (?Main@@$$FYMXP$01EAPE$AAVString@System@@@Z)
+MyForm.obj : error LNK2019: unresolved external symbol "extern "C" void * __cdecl curl_easy_init(void)" (?curl_easy_init@@$$J0YAPEAXXZ) referenced in function "void __clrcall Main(cli::array<System::PE$AAVString >^)" (?Main@@$$FYMXP$01EAPE$AAVString@System@@@Z)
+MyForm.obj : error LNK2019: unresolved external symbol "extern "C" void __cdecl curl_easy_cleanup(void *)" (?curl_easy_cleanup@@$$J0YAXPEAX@Z) referenced in function "void __clrcall Main(cli::array<System::PE$AAVString >^)" (?Main@@$$FYMXP$01EAPE$AAVString@System@@@Z)
+C:\Curl\curl-7.67.0\curl-7.67.0\builds\libcurl-vc-x86-release-static-ipv6-sspi-winssl\lib\libcurl_a.lib : warning LNK4272: library machine type 'x86' conflicts with target machine type 'x64'
+C:\Users\joel.magnusson2\Documents\Visual Studio 2017\Projects\Kalender\Kalender\x64\Debug\Project1.exe : fatal error LNK1120: 4 unresolved externals

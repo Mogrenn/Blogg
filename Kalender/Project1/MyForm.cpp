@@ -9,13 +9,10 @@ void Main(array<String^>^ args) {
 	Application::EnableVisualStyles();
 	Application::SetCompatibleTextRenderingDefault(false);
 	Project1::MyForm form;
-	Application::Run(%form);
+	//Application::Run(%form);
 
-	CURL *curl = curl_easy_init();
-	if (curl) {
-		CURLcode res;
-		curl_easy_setopt(curl, CURLOPT_URL, "http://example.com");
-		res = curl_easy_perform(curl);
-		curl_easy_cleanup(curl);
-	}
+	CURL *curl;
+
+	curl = curl_easy_init();
+	curl_easy_cleanup(curl);
 }

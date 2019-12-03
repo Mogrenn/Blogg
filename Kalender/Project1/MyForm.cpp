@@ -1,5 +1,6 @@
 #include "MyForm.h"
 #include "accountstuff.h"
+#include "Login.h"
 using namespace System;
 using namespace System::Windows::Forms;
 [STAThreadAttribute]

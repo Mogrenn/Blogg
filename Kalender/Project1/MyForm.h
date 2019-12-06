@@ -103,8 +103,17 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-				parseson("funktion=skapaAKonto&titel=ketchup&anvandarId=&kalenderId=1&innehall=ketchup&startTid=0000-00-00 00:00:00&slutTid=2019-12-31 06:00:00", "10.130.216.101/TP/Kalender/funktioner/skapa.php");
-
+				string titel = "party";
+				string action = "skapaKalenderevent";
+				string anvandarId = "42";
+				string kalenderId = "2";
+				string innehall = "vi festar hos mig med morotskaka. ta med egna kaffemuggar";
+				string start = "2019-02-01 16:00:00";
+				string slut = "2019-02-02 06:00:00";
+				string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
+				//parseson("nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6", "10.130.216.101/TP/Admin/funktioner/skapa.php");
+				parseson(params.c_str(), "10.130.216.101/TP/Kalender/funktioner/skapa.php");
+				// nyckel=iRxOUsizwhoXddb4&funktion=skapaKalenderevent&titel=ketchup&anvandarId=6&kalenderId=2&innehall=ketchup&startTid=2019-01-01 01:00:00&slutTid=2019-12-31 06:00:00
 				time_t curday = time(0);
 				tm *ltm = localtime(&curday);
 				curWeekDay = ltm->tm_wday;

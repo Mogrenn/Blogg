@@ -1,6 +1,9 @@
   Project1.accountstuff.resources - Embedded, ContainedInManifestFile, 
   Project1.Login.resources - Embedded, ContainedInManifestFile, 
   Project1.MyForm.resources - Embedded, ContainedInManifestFile, 
+  Project1.skapa.resources - Embedded, ContainedInManifestFile, 
+  Project1.skapaKonto.resources - Embedded, ContainedInManifestFile, 
+  Project1.taBort.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly Project1, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -16,6 +19,9 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
+Class Project1.inbjudningar: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class Project1.Login: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -23,6 +29,12 @@ Class Project1.Login: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.String password : Public
   Methods:
     validate(Object, EventArgs): PrivateScope, Public, HideBySig
+Class Project1.taBort: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.skapaKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -33,6 +45,7 @@ Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Int32 curYear : Public
     Int32 curWeek : Public
   Methods:
+    setToday(): PrivateScope, Public, HideBySig
     weekDay(Int32, Int32, Int32): PrivateScope, Public, HideBySig
     getLastDigits(Int32): PrivateScope, Public, HideBySig
     getFirstDigits(Int32): PrivateScope, Public, HideBySig
@@ -46,6 +59,12 @@ Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class Project1.accountstuff: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.redigera: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class Project1.skapa: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.taBortKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

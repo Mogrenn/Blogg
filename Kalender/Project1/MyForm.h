@@ -7,6 +7,8 @@
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
+#include "taBort.h"
+#include "skapaKonto.h"
 
 namespace Project1 {
 	using namespace rapidjson;
@@ -37,6 +39,9 @@ namespace Project1 {
 		int curYear;
 
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
+	private: System::Windows::Forms::MenuItem^  menuItem9;
+	private: System::Windows::Forms::MenuItem^  menuItem10;
+	private: System::Windows::Forms::MenuItem^  menuItem11;
 
 	public:
 		int curWeek;
@@ -90,6 +95,12 @@ namespace Project1 {
 		}
 
 	public:
+
+		void setToday() {
+
+			
+
+		}
 
 		int weekDay(int day, int month, int year) {
 			int y = getLastDigits(year);
@@ -246,7 +257,7 @@ namespace Project1 {
 
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
 
-private: System::Windows::Forms::MenuStrip^  menuStrip1;
+
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
@@ -301,7 +312,6 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->Fredag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Lordag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
 			this->Sondag = (gcnew System::Windows::Forms::DataGridViewTextBoxColumn());
-			this->menuStrip1 = (gcnew System::Windows::Forms::MenuStrip());
 			this->button7 = (gcnew System::Windows::Forms::Button());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->button9 = (gcnew System::Windows::Forms::Button());
@@ -314,6 +324,9 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->menuItem7 = (gcnew System::Windows::Forms::MenuItem());
 			this->menuItem6 = (gcnew System::Windows::Forms::MenuItem());
 			this->menuItem8 = (gcnew System::Windows::Forms::MenuItem());
+			this->menuItem9 = (gcnew System::Windows::Forms::MenuItem());
+			this->menuItem10 = (gcnew System::Windows::Forms::MenuItem());
+			this->menuItem11 = (gcnew System::Windows::Forms::MenuItem());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -430,14 +443,6 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->Sondag->ReadOnly = true;
 			this->Sondag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
 			// 
-			// menuStrip1
-			// 
-			this->menuStrip1->Location = System::Drawing::Point(0, 0);
-			this->menuStrip1->Name = L"menuStrip1";
-			this->menuStrip1->Size = System::Drawing::Size(1244, 24);
-			this->menuStrip1->TabIndex = 32;
-			this->menuStrip1->Text = L"menuStrip1";
-			// 
 			// button7
 			// 
 			this->button7->Location = System::Drawing::Point(199, 424);
@@ -470,7 +475,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// mainMenu1
 			// 
-			this->mainMenu1->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(1) { this->menuItem1 });
+			this->mainMenu1->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) { this->menuItem1, this->menuItem9 });
 			// 
 			// menuItem1
 			// 
@@ -480,6 +485,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 					this->menuItem8
 			});
 			this->menuItem1->Text = L"Menu";
+			this->menuItem1->Click += gcnew System::EventHandler(this, &MyForm::menuItem1_Click);
 			// 
 			// menuItem2
 			// 
@@ -495,7 +501,6 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->menuItem3->Checked = true;
 			this->menuItem3->Index = 0;
 			this->menuItem3->Text = L"Skapa";
-			this->menuItem3->Click += gcnew System::EventHandler(this, &MyForm::createSkapa);
 			// 
 			// menuItem4
 			// 
@@ -522,6 +527,24 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->menuItem8->Index = 2;
 			this->menuItem8->Text = L"Logga ut";
 			// 
+			// menuItem9
+			// 
+			this->menuItem9->Index = 1;
+			this->menuItem9->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) { this->menuItem10, this->menuItem11 });
+			this->menuItem9->Text = L"Konto";
+			// 
+			// menuItem10
+			// 
+			this->menuItem10->Index = 0;
+			this->menuItem10->Text = L"Skapa";
+			this->menuItem10->Click += gcnew System::EventHandler(this, &MyForm::openSkapaKonto);
+			// 
+			// menuItem11
+			// 
+			this->menuItem11->Index = 1;
+			this->menuItem11->Text = L"Ta bort";
+			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::taBortKonto);
+			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
@@ -546,18 +569,14 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->Controls->Add(this->button7);
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->dataGridView1);
-			this->Controls->Add(this->menuStrip1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->MainMenuStrip = this->menuStrip1;
 			this->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
 			this->Menu = this->mainMenu1;
 			this->Name = L"MyForm";
 			this->Text = L"Best kalender EU";
-			this->Load += gcnew System::EventHandler(this, &MyForm::MyForm_Load);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
-			this->PerformLayout();
 
 		}
 #pragma endregion
@@ -611,12 +630,18 @@ private: System::Void previousMonth(System::Object^  sender, System::EventArgs^ 
 	
 	insertCalenderData();
 }
-private: System::Void createSkapa(System::Object^  sender, System::EventArgs^  e) {
 
+private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
 
+private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
+	skapaKonto^ form = gcnew skapaKonto();
+	form->ShowDialog();
 
 }
-private: System::Void MyForm_Load(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e) {
+	taBort^ form = gcnew taBort();
+	form->ShowDialog();
 }
 };
 }

@@ -24,6 +24,21 @@
     <ClCompile Include="skapa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="redigera.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="taBort.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="inbjudningar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="skapaKonto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="taBortKonto.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -38,6 +53,21 @@
     <ClInclude Include="skapa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="redigera.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="taBort.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="inbjudningar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="skapaKonto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="taBortKonto.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
@@ -47,6 +77,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="skapa.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

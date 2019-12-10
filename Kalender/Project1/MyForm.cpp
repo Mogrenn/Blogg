@@ -40,6 +40,8 @@ void Main(array<String ^> ^args) {
 	Project1::MyForm form;
 	Application::Run(%form);
 
+
+
 	/*
 	char ret;
 	CURL *curl;

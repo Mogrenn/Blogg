@@ -1,11 +1,23 @@
 ﻿  MyForm.cpp
+<<<<<<< HEAD
 c:\kalenderprojekt\kalender\kalender\project1\myform.h(70): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: see declaration of 'localtime'
+=======
+c:\kalenderprojekt\kalender\kalender\project1\myform.h(50): warning C4101: 'retval': unreferenced local variable
+c:\kalenderprojekt\kalender\kalender\project1\myform.h(123): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: see declaration of 'localtime'
+c:\kalenderprojekt\kalender\kalender\project1\myform.h(82): warning C4715: 'Project1::parseson': not all control paths return a value
+>>>>>>> master
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\diyfp.h(98): warning C4793: 'rapidjson::internal::DiyFp::Normalize': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\diyfp.h(67): warning C4793: 'rapidjson::internal::DiyFp::operator*': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\biginteger.h(241): warning C4793: 'rapidjson::internal::BigInteger::MulAdd64': function compiled as native:
   	Found an intrinsic not supported in managed code
+<<<<<<< HEAD
   inbjudningar.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
   Project1.vcxproj -> C:\kalenderprojekt\kalender\Kalender\x64\Debug\Project1.exe
+=======
+  Login.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+  Project1.vcxproj -> C:\kalenderprojekt\Kalender\Kalender\x64\Debug\Project1.exe
+>>>>>>> master

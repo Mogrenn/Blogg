@@ -139,12 +139,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="inbjudningar.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
+    <ClCompile Include="redigera.cpp" />
     <ClCompile Include="skapa.cpp" />
+    <ClCompile Include="skapaKonto.cpp" />
+    <ClCompile Include="taBort.cpp" />
+    <ClCompile Include="taBortKonto.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accountstuff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="inbjudningar.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Login.h">
@@ -153,7 +161,19 @@
     <ClInclude Include="MyForm.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="redigera.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="skapa.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="skapaKonto.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="taBort.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="taBortKonto.h">
       <FileType>CppForm</FileType>
     </ClInclude>
   </ItemGroup>
@@ -166,6 +186,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="skapa.resx">
+      <DependentUpon>skapa.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="skapaKonto.resx">
+      <DependentUpon>skapaKonto.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="taBort.resx">
+      <DependentUpon>taBort.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

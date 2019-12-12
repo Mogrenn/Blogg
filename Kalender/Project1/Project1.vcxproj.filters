@@ -39,6 +39,9 @@
     <ClCompile Include="taBortKonto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bjudInEvent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -68,6 +71,9 @@
     <ClInclude Include="taBortKonto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bjudInEvent.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
@@ -80,6 +86,15 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="skapa.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="skapaKonto.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="taBort.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="redigera.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

@@ -1,4 +1,7 @@
 #pragma once
+#include "curl/curl.h"
+#include "rapidjson/document.h"
+#include <cstring>
 
 namespace Project1 {
 
@@ -8,6 +11,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace rapidjson;
 
 	/// <summary>
 	/// Summary for taBort
@@ -15,12 +19,17 @@ namespace Project1 {
 	public ref class taBort : public System::Windows::Forms::Form
 	{
 	public:
+		CURL *curl;
+		CURLcode res;
+		
+	public:
+		
+
 		taBort(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			curl_global_init(CURL_GLOBAL_ALL);
+			curl = curl_easy_init();
 		}
 
 	protected:
@@ -96,8 +105,24 @@ namespace Project1 {
 		
 		if (test == System::Windows::Forms::DialogResult::Yes) {
 			//Skriv i json här för att delete konto
-			
+			if (curl) {
+				curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Admin/funktioner/tabort.php");
+				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel");
+				res = curl_easy_perform(curl);
+				if (res != CURLE_OK) {
+					Console::Write("Hej ");
+
+				}
+				else {
+					const char* = res.c_str();
+					Document* doc;
+					doc->Parse(res.ToString);
+
+				}
+				curl_easy_cleanup(curl);
+			}
 		}
+		curl_global_cleanup();
 		this->Close();
 	}
 	};

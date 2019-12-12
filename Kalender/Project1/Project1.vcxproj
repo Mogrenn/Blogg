@@ -139,6 +139,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bjudInEvent.cpp" />
     <ClCompile Include="inbjudningar.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -150,6 +151,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accountstuff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="bjudInEvent.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="inbjudningar.h">
@@ -186,6 +190,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="redigera.resx">
+      <DependentUpon>redigera.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="skapa.resx">
       <DependentUpon>skapa.h</DependentUpon>

@@ -8,7 +8,12 @@
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
 #include "taBort.h"
+#include "taBortKonto.h"
 #include "skapaKonto.h"
+#include "inbjudningar.h"
+#include "skapa.h"
+#include "redigera.h"
+#include "bjudInEvent.h"
 #include "rapidjson/encodings.h"
 #define CURL_STATICLIB
 #include <curl/curl.h>
@@ -98,10 +103,6 @@ namespace Project1 {
 		int curDay;
 		int curYear;
 
-	private: System::Windows::Forms::RichTextBox^  richTextBox1;
-	private: System::Windows::Forms::MenuItem^  menuItem9;
-	private: System::Windows::Forms::MenuItem^  menuItem10;
-	private: System::Windows::Forms::MenuItem^  menuItem11;
 
 	public:
 		int curWeek;
@@ -286,38 +287,10 @@ namespace Project1 {
 			}
 		}
 
-
-
-
-
-
-
-
-
-	private: System::Windows::Forms::DataGridView^  dataGridView1;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
-	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	private: System::Windows::Forms::DataGridView^  dataGridView2;
-
-
+private: System::Windows::Forms::DataGridView^  dataGridView1;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
+private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
+private: System::Windows::Forms::DataGridView^  dataGridView2;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
@@ -338,6 +311,10 @@ private: System::Windows::Forms::MenuItem^  menuItem5;
 private: System::Windows::Forms::MenuItem^  menuItem7;
 private: System::Windows::Forms::MenuItem^  menuItem6;
 private: System::Windows::Forms::MenuItem^  menuItem8;
+private: System::Windows::Forms::RichTextBox^  richTextBox1;
+private: System::Windows::Forms::MenuItem^  menuItem9;
+private: System::Windows::Forms::MenuItem^  menuItem10;
+private: System::Windows::Forms::MenuItem^  menuItem11;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -558,29 +535,33 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// menuItem3
 			// 
-			this->menuItem3->Checked = true;
 			this->menuItem3->Index = 0;
 			this->menuItem3->Text = L"Skapa";
+			this->menuItem3->Click += gcnew System::EventHandler(this, &MyForm::skapaEvent);
 			// 
 			// menuItem4
 			// 
 			this->menuItem4->Index = 1;
 			this->menuItem4->Text = L"Redigera";
+			this->menuItem4->Click += gcnew System::EventHandler(this, &MyForm::redigeraEvent);
 			// 
 			// menuItem5
 			// 
 			this->menuItem5->Index = 2;
 			this->menuItem5->Text = L"Ta Bort";
+			this->menuItem5->Click += gcnew System::EventHandler(this, &MyForm::taBortEvent);
 			// 
 			// menuItem7
 			// 
 			this->menuItem7->Index = 3;
 			this->menuItem7->Text = L"Bjud in";
+			this->menuItem7->Click += gcnew System::EventHandler(this, &MyForm::bjudIn);
 			// 
 			// menuItem6
 			// 
 			this->menuItem6->Index = 1;
 			this->menuItem6->Text = L"Inbjudningar";
+			this->menuItem6->Click += gcnew System::EventHandler(this, &MyForm::inbjudningarEvent);
 			// 
 			// menuItem8
 			// 
@@ -603,7 +584,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			this->menuItem11->Index = 1;
 			this->menuItem11->Text = L"Ta bort";
-			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::taBortKonto);
+			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::tabortKonto);
 			// 
 			// richTextBox1
 			// 
@@ -699,8 +680,28 @@ private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^
 	form->ShowDialog();
 
 }
-private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void tabortKonto(System::Object^  sender, System::EventArgs^  e) {
+	taBortKonto^ form = gcnew taBortKonto();
+	form->ShowDialog();
+}
+private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
+	skapa^ form = gcnew skapa();
+	form->ShowDialog();
+}
+private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
+	redigera^ form = gcnew redigera();
+	form->ShowDialog();
+}
+private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
 	taBort^ form = gcnew taBort();
+	form->ShowDialog();
+}
+private: System::Void bjudIn(System::Object^  sender, System::EventArgs^  e) {
+	bjudInEvent^ form = gcnew bjudInEvent();
+	form->ShowDialog();
+}
+private: System::Void inbjudningarEvent(System::Object^  sender, System::EventArgs^  e) {
+	inbjudningar^ form = gcnew inbjudningar();
 	form->ShowDialog();
 }
 };

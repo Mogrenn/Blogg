@@ -10,12 +10,12 @@ namespace Project1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for redigera
+	/// Summary for bjudInEvent
 	/// </summary>
-	public ref class redigera : public System::Windows::Forms::Form
+	public ref class bjudInEvent : public System::Windows::Forms::Form
 	{
 	public:
-		redigera(void)
+		bjudInEvent(void)
 		{
 			InitializeComponent();
 			//
@@ -27,15 +27,13 @@ namespace Project1 {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~redigera()
+		~bjudInEvent()
 		{
 			if (components)
 			{
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::TextBox^  textBox1;
-	protected:
 
 	private:
 		/// <summary>
@@ -50,29 +48,12 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
-			this->SuspendLayout();
-			// 
-			// textBox1
-			// 
-			this->textBox1->Location = System::Drawing::Point(27, 26);
-			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(245, 20);
-			this->textBox1->TabIndex = 0;
-			// 
-			// redigera
-			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->components = gcnew System::ComponentModel::Container();
+			this->Size = System::Drawing::Size(300,300);
+			this->Text = L"bjudInEvent";
+			this->Padding = System::Windows::Forms::Padding(0);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(303, 230);
-			this->Controls->Add(this->textBox1);
-			this->Name = L"redigera";
-			this->Text = L"redigera";
-			this->ResumeLayout(false);
-			this->PerformLayout();
-
 		}
 #pragma endregion
-
 	};
 }

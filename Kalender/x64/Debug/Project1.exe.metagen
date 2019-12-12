@@ -32,6 +32,9 @@ Class Project1.Login: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
 Class Project1.taBort: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Void* curl : Public
+    CURLcode res : Public
 Class Project1.skapaKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName

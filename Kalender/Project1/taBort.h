@@ -1,7 +1,5 @@
 #pragma once
 #include "curl/curl.h"
-#include "rapidjson/document.h"
-#include <cstring>
 
 namespace Project1 {
 
@@ -11,20 +9,18 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace rapidjson;
 
 	/// <summary>
 	/// Summary for taBort
 	/// </summary>
 	public ref class taBort : public System::Windows::Forms::Form
 	{
+
 	public:
 		CURL *curl;
 		CURLcode res;
-		
-	public:
-		
 
+	public:
 		taBort(void)
 		{
 			InitializeComponent();
@@ -104,24 +100,16 @@ namespace Project1 {
 		System::Windows::Forms::DialogResult test = MessageBox::Show("Är du säker", "dubbel koll", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 		
 		if (test == System::Windows::Forms::DialogResult::Yes) {
-			//Skriv i json här för att delete konto
+			
 			if (curl) {
 				curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Admin/funktioner/tabort.php");
-				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel");
+				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
 				res = curl_easy_perform(curl);
-				if (res != CURLE_OK) {
-					Console::Write("Hej ");
-
-				}
-				else {
-					/*
-					
-					Document* doc;
-					doc->Parse(res.ToString);
-					*/
-				}
+				if (res != CURLE_OK)
+					Console::Write("hej");
 				curl_easy_cleanup(curl);
 			}
+			
 		}
 		curl_global_cleanup();
 		this->Close();

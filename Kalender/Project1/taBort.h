@@ -114,10 +114,11 @@ namespace Project1 {
 
 				}
 				else {
-					const char* = res.c_str();
+					/*
+					
 					Document* doc;
 					doc->Parse(res.ToString);
-
+					*/
 				}
 				curl_easy_cleanup(curl);
 			}

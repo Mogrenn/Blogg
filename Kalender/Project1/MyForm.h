@@ -17,15 +17,15 @@
 
 
 namespace Project1 {
-	using namespace rapidjson;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace rapidjson;
+	
 	using namespace std;
+
 	namespace
 	{
 		std::size_t callback(
@@ -47,48 +47,67 @@ namespace Project1 {
 	
 	}
 
-	string parseson(const char *parametrar,const char *url){
-		CURLcode ret;
-		CURL *curl;
-		string* retval;
-		int httpCode(0);
-		std::string readBuffer;
-		curl = curl_easy_init();
-		if (curl) {
-			const char *data = parametrar;
-			curl_easy_setopt(curl, CURLOPT_URL, url);
-			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
-			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
-			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-			ret = curl_easy_perform(curl);
-			if (ret != CURLE_OK)
-				cout << "fel på begäran";
-			
-			cout << readBuffer;
-			curl_easy_cleanup(curl);
-
-			const char* json = readBuffer.c_str(); 
-
-			Document d;
-			d.Parse(json);
-
-			StringBuffer buffer;
-			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
-			d.Accept(writer);
-			const char* output = buffer.GetString();
-			std::cout << output;
-
-			return output;
-		}
-	}
+	
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
+		string parseson(const char *parametrar, const char *url) {
+			CURLcode ret;
+			CURL *curl;
+			string* retval;
+			int httpCode(0);
+			std::string readBuffer;
+			curl = curl_easy_init();
+			if (curl) {
+				const char *data = parametrar;
+				curl_easy_setopt(curl, CURLOPT_URL, url);
+				curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+				curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
+				ret = curl_easy_perform(curl);
+				if (ret != CURLE_OK)
+					cout << "fel på begäran";
+
+				cout << readBuffer;
+				curl_easy_cleanup(curl);
+
+				const char* json = readBuffer.c_str();
+
+				Document d;
+				d.Parse(json);
+
+				StringBuffer buffer;
+				Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
+				d.Accept(writer);
+				const char* output = buffer.GetString();
+				std::cout << output;
+
+				return output;
+			}
+		}
+		void requestData(string params, const char *url) {
+			/*string titel = "party";
+			string action = "skapaKalenderevent";
+			string anvandarId = "42";
+			string kalenderId = "2";
+			string innehall = "vi festar hos mig med morotskaka. ta med egna servetter";
+			string start = "2019-02-01 16:00:00";
+			string slut = "2019-02-02 06:00:00";*/
+			//string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
+			//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6";
+			//string params = "nyckel=iRxOUsizwhoXddb4&kalendersida=1";
+			//string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
+			//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaKalender&anvandarId="+anvandarId+"&titel=systemkalendern";
+			//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
+			//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
+			//const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
+			MessageBoxA(NULL, parseson(params.c_str(), url).c_str(), "serversvar:", MB_OK | MB_ICONQUESTION);
+			// nyckel=iRxOUsizwhoXddb4
+		}
 
 
 
@@ -109,23 +128,7 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-				string titel = "party";
-				string action = "skapaKalenderevent";
-				string anvandarId = "42";
-				string kalenderId = "2";
-				string innehall = "vi festar hos mig med morotskaka. ta med egna servetter";
-				string start = "2019-02-01 16:00:00";
-				string slut = "2019-02-02 06:00:00";
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6";
-				//string params = "nyckel=iRxOUsizwhoXddb4&kalendersida=1";
-				string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaKalender&anvandarId="+anvandarId+"&titel=systemkalendern";
-				//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
-				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
-				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
-				parseson(params.c_str(), url);
-				// nyckel=iRxOUsizwhoXddb4
+				
 				time_t curday = time(0);
 				tm *ltm = localtime(&curday);
 				curWeekDay = ltm->tm_wday;

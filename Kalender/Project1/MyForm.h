@@ -1,3 +1,6 @@
+#ifndef _SKAPAKONTO_H_
+#define _SKAPAKONTO_H_
+
 #pragma once
 #include <ctime>
 #include <list>
@@ -17,7 +20,6 @@
 
 
 namespace Project1 {
-	using namespace rapidjson;
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -26,8 +28,9 @@ namespace Project1 {
 	using namespace System::Drawing;
 	using namespace rapidjson;
 	using namespace std;
-	namespace
-	{
+
+
+	namespace UTF{
 		std::size_t callback(
 			const char* in,
 			std::size_t size,
@@ -40,6 +43,7 @@ namespace Project1 {
 			return totalBytes;
 		}
 	}
+
 	namespace rapidjson {
 	
 	template<typename CharType = char>
@@ -49,6 +53,7 @@ namespace Project1 {
 
 	string parseson(const char *parametrar,const char *url){
 		CURLcode ret;
+		
 		CURL *curl;
 		string* retval;
 		int httpCode(0);
@@ -59,7 +64,7 @@ namespace Project1 {
 			curl_easy_setopt(curl, CURLOPT_URL, url);
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, UTF::callback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
 			ret = curl_easy_perform(curl);
@@ -705,3 +710,4 @@ private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e
 }
 };
 }
+#endif

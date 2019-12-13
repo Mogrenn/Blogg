@@ -1,4 +1,24 @@
+#ifndef _MYFORM_H_
+#define _MYFORM_H_
+
 #pragma once
+#include <ctime>
+#include <list>
+#include <string>
+#include "Login.h"
+#include <cmath>
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include "taBort.h"
+#include "skapaKonto.h"
+#include "rapidjson/encodings.h"
+#define CURL_STATICLIB
+#include <curl/curl.h>
+#include <algorithm>
+#include <codecvt>
+#include <iostream>
+
 
 namespace Project1 {
 
@@ -8,19 +28,43 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace rapidjson;
+	using namespace std;
+	
+	namespace UTF2{
+		std::size_t callback(
+			const char* in,
+			std::size_t size,
+			std::size_t num,
+			std::string* out)
+		{
+			const std::size_t totalBytes(size * num);
+			out->append(in, totalBytes);
 
+			return totalBytes;
+		}
+	}
+	
+	namespace rapidjson {
+
+		template<typename CharType = char>
+		struct UTF8;
+
+	}
 	/// <summary>
 	/// Summary for skapaKonto
 	/// </summary>
 	public ref class skapaKonto : public System::Windows::Forms::Form
 	{
 	public:
+		CURL *curl;
+		CURLcode ret;
+
 		skapaKonto(void)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			curl_global_init(CURL_GLOBAL_ALL);
+			curl = curl_easy_init();
 		}
 
 	protected:
@@ -63,41 +107,47 @@ namespace Project1 {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(45, 63);
+			this->textBox1->Location = System::Drawing::Point(60, 78);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox1->Name = L"textBox1";
-			this->textBox1->Size = System::Drawing::Size(247, 20);
+			this->textBox1->Size = System::Drawing::Size(328, 22);
 			this->textBox1->TabIndex = 0;
 			// 
 			// contextMenuStrip1
 			// 
+			this->contextMenuStrip1->ImageScalingSize = System::Drawing::Size(20, 20);
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
 			this->contextMenuStrip1->Size = System::Drawing::Size(61, 4);
 			// 
 			// textBox2
 			// 
-			this->textBox2->Location = System::Drawing::Point(45, 89);
+			this->textBox2->Location = System::Drawing::Point(60, 110);
+			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->textBox2->Name = L"textBox2";
 			this->textBox2->PasswordChar = '*';
-			this->textBox2->Size = System::Drawing::Size(247, 20);
+			this->textBox2->Size = System::Drawing::Size(328, 22);
 			this->textBox2->TabIndex = 2;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(103, 115);
+			this->button1->Location = System::Drawing::Point(137, 142);
+			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(140, 50);
+			this->button1->Size = System::Drawing::Size(187, 62);
 			this->button1->TabIndex = 3;
 			this->button1->Text = L"Skapa";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &skapaKonto::button1_Click);
 			// 
 			// skapaKonto
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(348, 232);
+			this->ClientSize = System::Drawing::Size(464, 286);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
+			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
 			this->Name = L"skapaKonto";
 			this->Text = L"skapaKonto";
 			this->ResumeLayout(false);
@@ -105,5 +155,43 @@ namespace Project1 {
 
 		}
 #pragma endregion
+	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^  e) {
+		int httpCode(0);
+		std::string readBuffer;
+		//string* retval;
+		if (curl) {
+			//String^ anamn = this->textBox1->Text;
+			const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
+			//string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&tjanst=47&rollid=6";
+			string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=BJORN&tjanst=47&rollid=6";
+			const char *data = param.c_str();
+			curl_easy_setopt(curl, CURLOPT_URL, url);
+			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, UTF2::callback);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
+			ret = curl_easy_perform(curl);
+			if (ret != CURLE_OK)
+				Console::Write("fel på begäran");
+			
+			cout << readBuffer;
+			curl_easy_cleanup(curl);
+
+			const char* json = readBuffer.c_str();
+
+			Document d;
+			d.Parse(json);
+
+			StringBuffer buffer;
+			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
+			d.Accept(writer);
+			const char* output = buffer.GetString();
+			std::cout << output;
+			
+			//MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+		}
+	}
 	};
 }
+#endif 

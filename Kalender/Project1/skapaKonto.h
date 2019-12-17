@@ -1,27 +1,20 @@
-#ifndef _MYFORM_H_
-#define _MYFORM_H_
+
 
 #pragma once
 #include <ctime>
 #include <list>
 #include <string>
-#include "Login.h"
 #include <cmath>
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/stringbuffer.h"
-#include "taBort.h"
-#include "skapaKonto.h"
+#include <iostream>
+#include <msclr\marshal_cppstd.h>
 #include "rapidjson/encodings.h"
 #define CURL_STATICLIB
 #include <curl/curl.h>
 #include <algorithm>
 #include <codecvt>
-#include <iostream>
-
-
-namespace Project1 {
-
 	using namespace System;
 	using namespace System::ComponentModel;
 	using namespace System::Collections;
@@ -29,10 +22,11 @@ namespace Project1 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace rapidjson;
-	using namespace std;
-	
+
+namespace Project1 {
+		
 	namespace UTF2{
-		std::size_t callback(
+		inline std::size_t callback(
 			const char* in,
 			std::size_t size,
 			std::size_t num,
@@ -44,13 +38,10 @@ namespace Project1 {
 			return totalBytes;
 		}
 	}
-	
-	namespace rapidjson {
 
-		template<typename CharType = char>
-		struct UTF8;
 
-	}
+
+
 	/// <summary>
 	/// Summary for skapaKonto
 	/// </summary>
@@ -58,6 +49,8 @@ namespace Project1 {
 	{
 	public:
 		CURL *curl;
+
+	public:
 		CURLcode ret;
 
 		skapaKonto(void)
@@ -81,7 +74,7 @@ namespace Project1 {
 	private: System::Windows::Forms::TextBox^  textBox1;
 	protected:
 	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
-	private: System::Windows::Forms::TextBox^  textBox2;
+
 	private: System::Windows::Forms::Button^  button1;
 	private: System::ComponentModel::IContainer^  components;
 
@@ -101,14 +94,13 @@ namespace Project1 {
 			this->components = (gcnew System::ComponentModel::Container());
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
-			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(60, 78);
-			this->textBox1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->textBox1->Location = System::Drawing::Point(71, 80);
+			this->textBox1->Margin = System::Windows::Forms::Padding(4);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(328, 22);
 			this->textBox1->TabIndex = 0;
@@ -119,19 +111,10 @@ namespace Project1 {
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
 			this->contextMenuStrip1->Size = System::Drawing::Size(61, 4);
 			// 
-			// textBox2
-			// 
-			this->textBox2->Location = System::Drawing::Point(60, 110);
-			this->textBox2->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
-			this->textBox2->Name = L"textBox2";
-			this->textBox2->PasswordChar = '*';
-			this->textBox2->Size = System::Drawing::Size(328, 22);
-			this->textBox2->TabIndex = 2;
-			// 
 			// button1
 			// 
 			this->button1->Location = System::Drawing::Point(137, 142);
-			this->button1->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->button1->Margin = System::Windows::Forms::Padding(4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(187, 62);
 			this->button1->TabIndex = 3;
@@ -145,9 +128,8 @@ namespace Project1 {
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(464, 286);
 			this->Controls->Add(this->button1);
-			this->Controls->Add(this->textBox2);
 			this->Controls->Add(this->textBox1);
-			this->Margin = System::Windows::Forms::Padding(4, 4, 4, 4);
+			this->Margin = System::Windows::Forms::Padding(4);
 			this->Name = L"skapaKonto";
 			this->Text = L"skapaKonto";
 			this->ResumeLayout(false);
@@ -160,10 +142,9 @@ namespace Project1 {
 		std::string readBuffer;
 		//string* retval;
 		if (curl) {
-			//String^ anamn = this->textBox1->Text;
+			String^ anamn = this->textBox1->Text;
 			const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
-			//string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&tjanst=47&rollid=6";
-			string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=BJORN&tjanst=47&rollid=6";
+			std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&tjanst=47&rollid=6";
 			const char *data = param.c_str();
 			curl_easy_setopt(curl, CURLOPT_URL, url);
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
@@ -175,7 +156,7 @@ namespace Project1 {
 			if (ret != CURLE_OK)
 				Console::Write("fel på begäran");
 			
-			cout << readBuffer;
+			std::cout << readBuffer;
 			curl_easy_cleanup(curl);
 
 			const char* json = readBuffer.c_str();
@@ -189,9 +170,8 @@ namespace Project1 {
 			const char* output = buffer.GetString();
 			std::cout << output;
 			
-			//MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+			MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
 	};
 }
-#endif 

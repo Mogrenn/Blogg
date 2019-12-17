@@ -1,11 +1,9 @@
-#ifndef _SKAPAKONTO_H_
-#define _SKAPAKONTO_H_
+
 
 #pragma once
 #include <ctime>
 #include <list>
 #include <string>
-#include "Login.h"
 #include <cmath>
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
@@ -18,7 +16,6 @@
 #include <algorithm>
 #include <codecvt>
 
-
 namespace Project1 {
 	using namespace System;
 	using namespace System::ComponentModel;
@@ -28,7 +25,6 @@ namespace Project1 {
 	using namespace System::Drawing;
 	using namespace rapidjson;
 	using namespace std;
-
 
 	namespace UTF{
 		std::size_t callback(
@@ -55,7 +51,7 @@ namespace Project1 {
 		CURLcode ret;
 		
 		CURL *curl;
-		string* retval;
+		//string* retval;
 		int httpCode(0);
 		std::string readBuffer;
 		curl = curl_easy_init();
@@ -123,8 +119,8 @@ namespace Project1 {
 				string slut = "2019-02-02 06:00:00";
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6";
-				//string params = "nyckel=iRxOUsizwhoXddb4&kalendersida=1";
-				string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
+				string params = "nyckel=iRxOUsizwhoXddb4&tjanstId=47";
+				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaKalender&anvandarId="+anvandarId+"&titel=systemkalendern";
 				//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
 				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
@@ -710,4 +706,3 @@ private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e
 }
 };
 }
-#endif

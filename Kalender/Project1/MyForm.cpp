@@ -1,3 +1,4 @@
+#pragma once
 #include "MyForm.h"
 #include "accountstuff.h"
 #include "stdafx.h"
@@ -59,3 +60,5 @@ void Main(array<String ^> ^args) {
 	}
 	*/
 	}
+
+

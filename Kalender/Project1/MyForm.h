@@ -116,10 +116,11 @@ namespace Project1 {
 
 	public:
 		int curWeek;
-		MyForm(void)
+		MyForm(std::string id)
 		{
 			InitializeComponent();
 			try {
+				std::string anvadarId = id;
 				months[0] = "Januari";
 				months[1] = "Februari";
 				months[2] = "Mars";
@@ -651,6 +652,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->Menu = this->mainMenu1;
 			this->Name = L"MyForm";
 			this->Text = L"Best kalender EU";
+			this->FormClosed += gcnew System::Windows::Forms::FormClosedEventHandler(this, &MyForm::shutdown);
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->EndInit();
 			this->ResumeLayout(false);
@@ -740,9 +742,14 @@ private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e
 	form->ShowDialog();
 }
 
+private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+	exit(0);
+}
+
 private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
 	Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto();
 	form->ShowDialog();
+
 }
 };
 }

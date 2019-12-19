@@ -10,6 +10,7 @@
 #include "rapidjson/stringbuffer.h"
 #include "taBort.h"
 #include "skapaKonto.h"
+#include "redigeraKonto.h"
 #include "rapidjson/encodings.h"
 #define CURL_STATICLIB
 #include <curl/curl.h>
@@ -103,6 +104,7 @@ namespace Project1 {
 	private: System::Windows::Forms::MenuItem^  menuItem9;
 	private: System::Windows::Forms::MenuItem^  menuItem10;
 	private: System::Windows::Forms::MenuItem^  menuItem11;
+	private: System::Windows::Forms::MenuItem^  menuItem12;
 
 	public:
 		int curWeek;
@@ -119,12 +121,15 @@ namespace Project1 {
 				string slut = "2019-02-02 06:00:00";
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6";
-				string params = "nyckel=iRxOUsizwhoXddb4&tjanstId=47";
+				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=redigeraRoll&anvandarid=42&rollid=1";
+				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=redigeraKonto&anamn=widow";
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
+				string params = "nyckel=iRxOUsizwhoXddb4&tjanstId=47";
 				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaKalender&anvandarId="+anvandarId+"&titel=systemkalendern";
 				//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
 				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
 				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
+				//const char* url = "10.130.216.101/TP/Admin/funktioner/redigera.php";
 				parseson(params.c_str(), url);
 				// nyckel=iRxOUsizwhoXddb4
 				time_t curday = time(0);
@@ -388,6 +393,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->menuItem9 = (gcnew System::Windows::Forms::MenuItem());
 			this->menuItem10 = (gcnew System::Windows::Forms::MenuItem());
 			this->menuItem11 = (gcnew System::Windows::Forms::MenuItem());
+			this->menuItem12 = (gcnew System::Windows::Forms::MenuItem());
 			this->richTextBox1 = (gcnew System::Windows::Forms::RichTextBox());
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2))->BeginInit();
@@ -402,11 +408,11 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->dataGridView1->BackgroundColor = System::Drawing::SystemColors::MenuHighlight;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
 			this->dataGridView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::DataGridViewColumn^  >(2) { this->Tid, this->Event });
-			this->dataGridView1->Location = System::Drawing::Point(882, 0);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView1->Location = System::Drawing::Point(1176, 0);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->RowTemplate->Height = 28;
-			this->dataGridView1->Size = System::Drawing::Size(314, 587);
+			this->dataGridView1->Size = System::Drawing::Size(419, 722);
 			this->dataGridView1->TabIndex = 11;
 			// 
 			// Tid
@@ -430,12 +436,12 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 				this->Vecka,
 					this->Mandag, this->Tisdag, this->Onsdag, this->Torsdag, this->Fredag, this->Lordag, this->Sondag
 			});
-			this->dataGridView2->Location = System::Drawing::Point(115, 69);
-			this->dataGridView2->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView2->Location = System::Drawing::Point(153, 85);
+			this->dataGridView2->Margin = System::Windows::Forms::Padding(3, 2, 3, 2);
 			this->dataGridView2->Name = L"dataGridView2";
 			this->dataGridView2->RowTemplate->Height = 28;
 			this->dataGridView2->RowTemplate->Resizable = System::Windows::Forms::DataGridViewTriState::False;
-			this->dataGridView2->Size = System::Drawing::Size(563, 350);
+			this->dataGridView2->Size = System::Drawing::Size(751, 431);
 			this->dataGridView2->TabIndex = 31;
 			this->dataGridView2->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::selectDay);
 			// 
@@ -506,9 +512,10 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(199, 424);
+			this->button7->Location = System::Drawing::Point(265, 522);
+			this->button7->Margin = System::Windows::Forms::Padding(4);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(138, 30);
+			this->button7->Size = System::Drawing::Size(184, 37);
 			this->button7->TabIndex = 33;
 			this->button7->Text = L"Föregående";
 			this->button7->UseVisualStyleBackColor = true;
@@ -516,9 +523,10 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// button8
 			// 
-			this->button8->Location = System::Drawing::Point(343, 424);
+			this->button8->Location = System::Drawing::Point(457, 522);
+			this->button8->Margin = System::Windows::Forms::Padding(4);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(138, 30);
+			this->button8->Size = System::Drawing::Size(184, 37);
 			this->button8->TabIndex = 34;
 			this->button8->Text = L"Nuvarande";
 			this->button8->UseVisualStyleBackColor = true;
@@ -526,9 +534,10 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// button9
 			// 
-			this->button9->Location = System::Drawing::Point(487, 424);
+			this->button9->Location = System::Drawing::Point(649, 522);
+			this->button9->Margin = System::Windows::Forms::Padding(4);
 			this->button9->Name = L"button9";
-			this->button9->Size = System::Drawing::Size(138, 30);
+			this->button9->Size = System::Drawing::Size(184, 37);
 			this->button9->TabIndex = 35;
 			this->button9->Text = L"Nästa";
 			this->button9->UseVisualStyleBackColor = true;
@@ -591,7 +600,10 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// menuItem9
 			// 
 			this->menuItem9->Index = 1;
-			this->menuItem9->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(2) { this->menuItem10, this->menuItem11 });
+			this->menuItem9->MenuItems->AddRange(gcnew cli::array< System::Windows::Forms::MenuItem^  >(3) {
+				this->menuItem10, this->menuItem11,
+					this->menuItem12
+			});
 			this->menuItem9->Text = L"Konto";
 			// 
 			// menuItem10
@@ -606,24 +618,31 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->menuItem11->Text = L"Ta bort";
 			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::taBortKonto);
 			// 
+			// menuItem12
+			// 
+			this->menuItem12->Index = 2;
+			this->menuItem12->Text = L"redigera";
+			this->menuItem12->Click += gcnew System::EventHandler(this, &MyForm::redigeraKonton);
+			// 
 			// richTextBox1
 			// 
 			this->richTextBox1->Font = (gcnew System::Drawing::Font(L"Microsoft Sans Serif", 20, System::Drawing::FontStyle::Bold, System::Drawing::GraphicsUnit::Point,
 				static_cast<System::Byte>(0)));
-			this->richTextBox1->Location = System::Drawing::Point(286, 20);
+			this->richTextBox1->Location = System::Drawing::Point(381, 25);
+			this->richTextBox1->Margin = System::Windows::Forms::Padding(4);
 			this->richTextBox1->Multiline = false;
 			this->richTextBox1->Name = L"richTextBox1";
 			this->richTextBox1->ReadOnly = true;
-			this->richTextBox1->Size = System::Drawing::Size(214, 44);
+			this->richTextBox1->Size = System::Drawing::Size(284, 53);
 			this->richTextBox1->TabIndex = 36;
 			this->richTextBox1->Text = L"November 2019";
 			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->BackgroundImageLayout = System::Windows::Forms::ImageLayout::Stretch;
-			this->ClientSize = System::Drawing::Size(1244, 603);
+			this->ClientSize = System::Drawing::Size(1659, 742);
 			this->Controls->Add(this->richTextBox1);
 			this->Controls->Add(this->button9);
 			this->Controls->Add(this->button8);
@@ -631,7 +650,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->Controls->Add(this->dataGridView2);
 			this->Controls->Add(this->dataGridView1);
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::FixedSingle;
-			this->Margin = System::Windows::Forms::Padding(2, 3, 2, 3);
+			this->Margin = System::Windows::Forms::Padding(3, 4, 3, 4);
 			this->Menu = this->mainMenu1;
 			this->Name = L"MyForm";
 			this->Text = L"Best kalender EU";
@@ -704,5 +723,11 @@ private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e
 	taBort^ form = gcnew taBort();
 	form->ShowDialog();
 }
+
+private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
+	Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto();
+	form->ShowDialog();
+}
+
 };
 }

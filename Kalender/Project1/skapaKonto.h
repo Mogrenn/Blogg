@@ -49,6 +49,8 @@ namespace Project1 {
 	{
 	public:
 		CURL *curl;
+	private: System::Windows::Forms::Label^  label1;
+	public:
 
 	public:
 		CURLcode ret;
@@ -95,6 +97,7 @@ namespace Project1 {
 			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->button1 = (gcnew System::Windows::Forms::Button());
+			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -122,11 +125,21 @@ namespace Project1 {
 			this->button1->UseVisualStyleBackColor = true;
 			this->button1->Click += gcnew System::EventHandler(this, &skapaKonto::button1_Click);
 			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(200, 59);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(103, 17);
+			this->label1->TabIndex = 4;
+			this->label1->Text = L"användarnamn";
+			// 
 			// skapaKonto
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(464, 286);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
 			this->Margin = System::Windows::Forms::Padding(4);
@@ -170,6 +183,10 @@ namespace Project1 {
 			const char* output = buffer.GetString();
 			std::cout << output;
 			
+			if (output == NULL) {
+				MessageBoxA(NULL, "fel på begäran/ upptaget användarnamn", "serversvar:", MB_OK | MB_ICONQUESTION);
+			}
+			else
 			MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}

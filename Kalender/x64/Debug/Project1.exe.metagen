@@ -1,6 +1,8 @@
   Project1.accountstuff.resources - Embedded, ContainedInManifestFile, 
   Project1.Login.resources - Embedded, ContainedInManifestFile, 
   Project1.MyForm.resources - Embedded, ContainedInManifestFile, 
+  Project1.redigera.resources - Embedded, ContainedInManifestFile, 
+  Project1.redigeraKonto.resources - Embedded, ContainedInManifestFile, 
   Project1.skapa.resources - Embedded, ContainedInManifestFile, 
   Project1.skapaKonto.resources - Embedded, ContainedInManifestFile, 
   Project1.taBort.resources - Embedded, ContainedInManifestFile, 
@@ -36,6 +38,12 @@ Class Project1.taBort: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Void* curl : Public
     CURLcode res : Public
 Class Project1.skapaKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Void* curl : Public
+    CURLcode ret : Public
+Class Project1.redigeraKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:

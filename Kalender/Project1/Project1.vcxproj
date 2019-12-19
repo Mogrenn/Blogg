@@ -143,6 +143,7 @@
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="redigera.cpp" />
+    <ClCompile Include="redigeraKonto.cpp" />
     <ClCompile Include="skapa.cpp" />
     <ClCompile Include="skapaKonto.cpp" />
     <ClCompile Include="taBort.cpp" />
@@ -162,6 +163,9 @@
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="redigera.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="redigeraKonto.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="skapa.h">
@@ -186,6 +190,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="MyForm.resx">
       <DependentUpon>MyForm.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="redigera.resx">
+      <DependentUpon>redigera.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="redigeraKonto.resx">
+      <DependentUpon>redigeraKonto.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="skapa.resx">
       <DependentUpon>skapa.h</DependentUpon>

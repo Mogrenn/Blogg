@@ -42,6 +42,9 @@ namespace Project1 {
 	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
 	private: System::Windows::Forms::TextBox^  textBox2;
 	private: System::ComponentModel::IContainer^  components;
+	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::TextBox^  textBox2;
 
 	private:
 		/// <summary>
@@ -62,6 +65,9 @@ namespace Project1 {
 			this->EventId = (gcnew System::Windows::Forms::ListBox());
 			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
 			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
@@ -116,6 +122,44 @@ namespace Project1 {
 			this->Controls->Add(this->dateTimePicker2);
 			this->Controls->Add(this->dateTimePicker1);
 			this->Controls->Add(this->EventId);
+			this->textBox1->Location = System::Drawing::Point(110, 48);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(226, 22);
+			this->textBox1->TabIndex = 0;
+			// 
+			// label1
+			// 
+			this->label1->AutoSize = true;
+			this->label1->Location = System::Drawing::Point(197, 28);
+			this->label1->Name = L"label1";
+			this->label1->Size = System::Drawing::Size(46, 17);
+			this->label1->TabIndex = 1;
+			this->label1->Text = L"label1";
+			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(197, 73);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(46, 17);
+			this->label2->TabIndex = 2;
+			this->label2->Text = L"label2";
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(110, 93);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(226, 22);
+			this->textBox2->TabIndex = 3;
+			// 
+			// redigera
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
+			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(441, 309);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->label2);
+			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox1);
 			this->Name = L"redigera";
 			this->Text = L"redigera";

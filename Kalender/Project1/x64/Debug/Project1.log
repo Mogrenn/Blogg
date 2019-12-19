@@ -1,7 +1,12 @@
-﻿  MyForm.cpp
-c:\kalenderprojekt\kalender\kalender\project1\myform.h(136): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+﻿  Login.cpp
+c:\kalenderprojekt\kalender\kalender\project1\myform.h(163): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: see declaration of 'localtime'
-  redigeraKonto.cpp
+c:\kalenderprojekt\kalender\kalender\project1\login.h(35): warning C4348: 'Project1::rapidjson::UTF8': redefinition of default parameter: parameter 1
+  c:\kalenderprojekt\kalender\kalender\project1\login.h(36): note: see declaration of 'Project1::rapidjson::UTF8'
+  MyForm.cpp
+c:\kalenderprojekt\kalender\kalender\project1\myform.h(163): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17763.0\ucrt\time.h(506): note: see declaration of 'localtime'
+  redigera.cpp
   Generating Code...
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\diyfp.h(98): warning C4793: 'rapidjson::internal::DiyFp::Normalize': function compiled as native:
   	Found an intrinsic not supported in managed code
@@ -9,12 +14,13 @@ c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\inclu
   	Found an intrinsic not supported in managed code
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\biginteger.h(241): warning C4793: 'rapidjson::internal::BigInteger::MulAdd64': function compiled as native:
   	Found an intrinsic not supported in managed code
-c:\kalenderprojekt\kalender\kalender\project1\myform.h(87): warning C4715: 'Project1::parseson': not all control paths return a value
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\diyfp.h(98): warning C4793: 'rapidjson::internal::DiyFp::Normalize': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\diyfp.h(67): warning C4793: 'rapidjson::internal::DiyFp::operator*': function compiled as native:
   	Found an intrinsic not supported in managed code
 c:\kalenderprojekt\kalender\kalender\packages\rapidjson.1.0.2\build\native\include\rapidjson\internal\biginteger.h(241): warning C4793: 'rapidjson::internal::BigInteger::MulAdd64': function compiled as native:
   	Found an intrinsic not supported in managed code
-  inbjudningar.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
-  Project1.vcxproj -> C:\kalenderprojekt\Kalender\Kalender\x64\Debug\Project1.exe
+  bjudIn.obj : MSIL module encountered; incremental linking is disabled for MSIL; performing full link
+MyForm.obj : error LNK2005: "unsigned __int64 __cdecl Project1::UTF::callback(char const *,unsigned __int64,unsigned __int64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > *)" (?callback@UTF@Project1@@YA_KPEBD_K1PEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Login.obj
+MyForm.obj : error LNK2005: "unsigned __int64 __cdecl Project1::UTF::callback(char const *,unsigned __int64,unsigned __int64,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > *)" (?callback@UTF@Project1@@$$FYA_KPEBD_K1PEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z) already defined in Login.obj
+C:\kalenderprojekt\Kalender\Kalender\x64\Debug\Project1.exe : fatal error LNK1169: one or more multiply defined symbols found

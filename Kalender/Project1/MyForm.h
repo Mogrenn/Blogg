@@ -33,6 +33,10 @@ namespace Project1 {
 	using namespace rapidjson;
 	using namespace std;
 
+	namespace id {
+		//std::string anvandarId = id;
+	}
+
 	namespace UTF{
 		std::size_t callback(
 
@@ -102,6 +106,7 @@ namespace Project1 {
 
 
 	public:
+		
 		int curMonth;
 		int curWeekDay;
 		int curDay;
@@ -120,7 +125,7 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-				std::string anvadarId = id;
+				
 				months[0] = "Januari";
 				months[1] = "Februari";
 				months[2] = "Mars";
@@ -133,6 +138,7 @@ namespace Project1 {
 				months[9] = "Oktober";
 				months[10] = "November";
 				months[11] = "December";
+				
 				string titel = "party";
 				string action = "skapaKalenderevent";
 				string anvandarId = "42";
@@ -151,7 +157,7 @@ namespace Project1 {
 				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
 				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
 				//const char* url = "10.130.216.101/TP/Admin/funktioner/redigera.php";
-				parseson(params.c_str(), url);
+				//parseson(params.c_str(), url);
 				// nyckel=iRxOUsizwhoXddb4
 				time_t curday = time(0);
 				tm *ltm = localtime(&curday);
@@ -710,7 +716,7 @@ private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs
 private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
 	skapaKonto^ form = gcnew skapaKonto();
 	form->ShowDialog();
-
+	//string s = anvandarId;
 }
 private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
 	taBort^ form = gcnew taBort();

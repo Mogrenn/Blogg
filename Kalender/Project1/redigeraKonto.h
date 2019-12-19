@@ -182,18 +182,22 @@ namespace Project1 {
 
 			Document d;
 			d.Parse(json);
-
+			std::string kod = d["code"].GetString();
+			std::string stat = d["status"].GetString();
+			std::string msg = d["msg"].GetString();
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);
-			//assert(document["i"].IsNumber());
+			
 			const char* output = buffer.GetString();
 			std::cout << output;
+			std::string skrift = "kod: "+kod+" : "+msg;
+			const char* ut = skrift.c_str();
 			if (output == NULL) {
-				MessageBoxA(NULL, "fEL PÅ BEGÄRAN", "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, "Fel på begäran", "serversvar:", MB_OK | MB_ICONQUESTION);
 			}
 			else
-				MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, ut, "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
 };

@@ -1,9 +1,9 @@
 kalender/.vs
-Kalender/Debug
-Kalender/x64/Debug
-Kalender/Project1/Debug
+Kalender/Debug/
+Kalender/x64/Debug/
+Kalender/Project1/Debug/
 Kalender/Project1/x64/
-Kalender/Project1/x64/Debug
+Kalender/Project1/x64/Debug/
 
 *.rsuser
 *.suo
@@ -350,4 +350,4 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
-Kalender/Project1/Debug
+Kalender/Project1/Debug/

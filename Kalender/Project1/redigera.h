@@ -34,12 +34,20 @@ namespace Project1 {
 				delete components;
 			}
 		}
+	private: System::Windows::Forms::TextBox^  textBox1;
+	protected:
+	private: System::Windows::Forms::ContextMenuStrip^  contextMenuStrip1;
+	private: System::Windows::Forms::ListBox^  EventId;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker1;
+	private: System::Windows::Forms::DateTimePicker^  dateTimePicker2;
+	private: System::Windows::Forms::TextBox^  textBox2;
+	private: System::ComponentModel::IContainer^  components;
 
 	private:
 		/// <summary>
 		/// Required designer variable.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -48,11 +56,72 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->components = gcnew System::ComponentModel::Container();
-			this->Size = System::Drawing::Size(300,300);
-			this->Text = L"redigera";
-			this->Padding = System::Windows::Forms::Padding(0);
+			this->components = (gcnew System::ComponentModel::Container());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->EventId = (gcnew System::Windows::Forms::ListBox());
+			this->dateTimePicker1 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->dateTimePicker2 = (gcnew System::Windows::Forms::DateTimePicker());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->SuspendLayout();
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(65, 67);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(247, 20);
+			this->textBox1->TabIndex = 0;
+			// 
+			// contextMenuStrip1
+			// 
+			this->contextMenuStrip1->Name = L"contextMenuStrip1";
+			this->contextMenuStrip1->Size = System::Drawing::Size(61, 4);
+			// 
+			// EventId
+			// 
+			this->EventId->FormattingEnabled = true;
+			this->EventId->Location = System::Drawing::Point(65, 44);
+			this->EventId->Name = L"EventId";
+			this->EventId->Size = System::Drawing::Size(247, 17);
+			this->EventId->TabIndex = 2;
+			// 
+			// dateTimePicker1
+			// 
+			this->dateTimePicker1->Location = System::Drawing::Point(65, 161);
+			this->dateTimePicker1->Name = L"dateTimePicker1";
+			this->dateTimePicker1->Size = System::Drawing::Size(247, 20);
+			this->dateTimePicker1->TabIndex = 3;
+			// 
+			// dateTimePicker2
+			// 
+			this->dateTimePicker2->Location = System::Drawing::Point(65, 187);
+			this->dateTimePicker2->Name = L"dateTimePicker2";
+			this->dateTimePicker2->Size = System::Drawing::Size(247, 20);
+			this->dateTimePicker2->TabIndex = 4;
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(65, 93);
+			this->textBox2->Multiline = true;
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(247, 62);
+			this->textBox2->TabIndex = 5;
+			// 
+			// redigera
+			// 
+			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
+			this->ClientSize = System::Drawing::Size(407, 268);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->dateTimePicker2);
+			this->Controls->Add(this->dateTimePicker1);
+			this->Controls->Add(this->EventId);
+			this->Controls->Add(this->textBox1);
+			this->Name = L"redigera";
+			this->Text = L"redigera";
+			this->ResumeLayout(false);
+			this->PerformLayout();
+
 		}
 #pragma endregion
 	};

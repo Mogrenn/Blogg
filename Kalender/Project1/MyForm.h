@@ -1,8 +1,6 @@
 #pragma once
 #include <ctime>
-#include <list>
 #include <string>
-#include "Login.h"
 #include <cmath>
 #include "rapidjson/document.h"
 #include "rapidjson/writer.h"
@@ -10,11 +8,16 @@
 #include "taBort.h"
 #include "skapaKonto.h"
 #include "rapidjson/encodings.h"
-#define CURL_STATICLIB
 #include <curl/curl.h>
 #include <algorithm>
 #include <codecvt>
-
+#include "inbjudningar.h"
+#include "taBortKonto.h"
+#include "redigera.h"
+#include "skapa.h"
+#include "iostream"
+#include "bjudIn.h"
+#define CURL_STATICLIB
 
 namespace Project1 {
 	using namespace rapidjson;
@@ -26,9 +29,11 @@ namespace Project1 {
 	using namespace System::Drawing;
 	using namespace rapidjson;
 	using namespace std;
-	namespace
+
+	namespace test
 	{
-		std::size_t callback(
+	
+		inline std::size_t callback(
 			const char* in,
 			std::size_t size,
 			std::size_t num,
@@ -40,13 +45,14 @@ namespace Project1 {
 			return totalBytes;
 		}
 	}
+
 	namespace rapidjson {
-	
+
 	template<typename CharType = char>
 	struct UTF8;
 	
 	}
-
+	/*
 	string parseson(const char *parametrar,const char *url){
 		CURLcode ret;
 		CURL *curl;
@@ -59,7 +65,7 @@ namespace Project1 {
 			curl_easy_setopt(curl, CURLOPT_URL, url);
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, test::callback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 
 			ret = curl_easy_perform(curl);
@@ -82,7 +88,7 @@ namespace Project1 {
 
 			return output;
 		}
-	}
+	}*/
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
@@ -97,6 +103,7 @@ namespace Project1 {
 		int curWeekDay;
 		int curDay;
 		int curYear;
+		cli::array<String^>^ months = gcnew cli::array<String^>(12);
 
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
 	private: System::Windows::Forms::MenuItem^  menuItem9;
@@ -109,6 +116,18 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
+				months[0] = "Januari";
+				months[1] = "Februari";
+				months[2] = "Mars";
+				months[3] = "April";
+				months[4] = "Maj";
+				months[5] = "Juni";
+				months[6] = "Juli";
+				months[7] = "Augusti";
+				months[8] = "September";
+				months[9] = "Oktober";
+				months[10] = "November";
+				months[11] = "December";
 				string titel = "party";
 				string action = "skapaKalenderevent";
 				string anvandarId = "42";
@@ -124,7 +143,7 @@ namespace Project1 {
 				//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
 				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
 				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
-				parseson(params.c_str(), url);
+				//parseson(params.c_str(), url);
 				// nyckel=iRxOUsizwhoXddb4
 				time_t curday = time(0);
 				tm *ltm = localtime(&curday);
@@ -145,7 +164,7 @@ namespace Project1 {
 				}
 				
 				insertCalenderData();
-				this->richTextBox1->Text = "2019 November";
+				
 
 			}
 			catch (...) {
@@ -266,12 +285,13 @@ namespace Project1 {
 
 				}
 				dataGridView2->Rows->Add(curWeek, weekDays[0], weekDays[1], weekDays[2], weekDays[3], weekDays[4], weekDays[5], weekDays[6]);
+				dataGridView2->Columns["Sondag"]->DefaultCellStyle->ForeColor = Color::Red;
 				if (curWeek == 52) {
 					curWeek = 1;
 				}else
 					curWeek++;
 			}
-
+			this->richTextBox1->Text = months[curMonth - 1] + " " + curYear;
 		}
 
 	protected:
@@ -521,7 +541,6 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->button8->TabIndex = 34;
 			this->button8->Text = L"Nuvarande";
 			this->button8->UseVisualStyleBackColor = true;
-			this->button8->Click += gcnew System::EventHandler(this, &MyForm::LoginWindow);
 			// 
 			// button9
 			// 
@@ -558,34 +577,39 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			// menuItem3
 			// 
-			this->menuItem3->Checked = true;
 			this->menuItem3->Index = 0;
 			this->menuItem3->Text = L"Skapa";
+			this->menuItem3->Click += gcnew System::EventHandler(this, &MyForm::skapaEvent);
 			// 
 			// menuItem4
 			// 
 			this->menuItem4->Index = 1;
 			this->menuItem4->Text = L"Redigera";
+			this->menuItem4->Click += gcnew System::EventHandler(this, &MyForm::redigeraEvent);
 			// 
 			// menuItem5
 			// 
 			this->menuItem5->Index = 2;
 			this->menuItem5->Text = L"Ta Bort";
+			this->menuItem5->Click += gcnew System::EventHandler(this, &MyForm::taBortEvent);
 			// 
 			// menuItem7
 			// 
 			this->menuItem7->Index = 3;
 			this->menuItem7->Text = L"Bjud in";
+			this->menuItem7->Click += gcnew System::EventHandler(this, &MyForm::bjudInEvent);
 			// 
 			// menuItem6
 			// 
 			this->menuItem6->Index = 1;
 			this->menuItem6->Text = L"Inbjudningar";
+			this->menuItem6->Click += gcnew System::EventHandler(this, &MyForm::visaInbjudningar);
 			// 
 			// menuItem8
 			// 
 			this->menuItem8->Index = 2;
 			this->menuItem8->Text = L"Logga ut";
+			this->menuItem8->Click += gcnew System::EventHandler(this, &MyForm::exitApplikation);
 			// 
 			// menuItem9
 			// 
@@ -603,7 +627,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			// 
 			this->menuItem11->Index = 1;
 			this->menuItem11->Text = L"Ta bort";
-			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::taBortKonto);
+			this->menuItem11->Click += gcnew System::EventHandler(this, &MyForm::taBortkonto);
 			// 
 			// richTextBox1
 			// 
@@ -649,13 +673,7 @@ private: System::Void selectDay(System::Object^  sender, System::Windows::Forms:
 	}
 
 }
-private: System::Void LoginWindow(System::Object^  sender, System::EventArgs^  e) {
-	/*MessageBox::Show("Jag ger upp");
-	Login^ test = gcnew Login();
-	this->Hide();
-	test->ShowDialog();
-	this->Close();*/
-}
+
 private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
 	
 	dataGridView2->Rows->Clear();
@@ -699,8 +717,32 @@ private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^
 	form->ShowDialog();
 
 }
-private: System::Void taBortKonto(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
 	taBort^ form = gcnew taBort();
+	form->ShowDialog();
+}
+private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
+	skapa^ form = gcnew skapa();
+	form->ShowDialog();
+}
+private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
+	redigera^ form = gcnew redigera();
+	form->ShowDialog();
+}
+private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
+	inbjudningar^ form = gcnew inbjudningar();
+	form->ShowDialog();
+}
+private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
+	
+	this->Close();
+}
+private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
+	taBortKonto^ form = gcnew taBortKonto();
+	form->ShowDialog();
+}
+private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
+	bjudIn^ form = gcnew bjudIn();
 	form->ShowDialog();
 }
 };

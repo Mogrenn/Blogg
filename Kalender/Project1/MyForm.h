@@ -30,7 +30,7 @@ namespace Project1 {
 	using namespace rapidjson;
 	using namespace std;
 
-	namespace test
+	namespace callback
 	{
 	
 		inline std::size_t callback(
@@ -52,6 +52,8 @@ namespace Project1 {
 	struct UTF8;
 	
 	}
+
+	
 	/*
 	string parseson(const char *parametrar,const char *url){
 		CURLcode ret;
@@ -116,7 +118,7 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-				std::string anvadarId = id;
+				//anvandarId::anvadarId = id;
 				months[0] = "Januari";
 				months[1] = "Februari";
 				months[2] = "Mars";

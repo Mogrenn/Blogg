@@ -35,6 +35,7 @@ namespace Project1 {
 			InitializeComponent();
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
+			
 		}
 
 		void MarshalString(String ^ s, string& os) {
@@ -154,7 +155,7 @@ namespace Project1 {
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, opt.c_str());
 			curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1");   // replace with your actual proxy
 			curl_easy_setopt(curl, CURLOPT_PROXYPORT, 8081L);
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, test::callback);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback::callback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 			res = curl_easy_perform(curl);
 			if (res != CURLE_OK) {

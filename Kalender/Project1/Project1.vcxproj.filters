@@ -39,6 +39,7 @@
     <ClCompile Include="taBortKonto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bjudIn.cpp">
     <ClCompile Include="redigeraKonto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -71,6 +72,7 @@
     <ClInclude Include="taBortKonto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bjudIn.h">
     <ClInclude Include="redigeraKonto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -95,6 +97,12 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="redigera.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inbjudningar.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="taBortKonto.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>

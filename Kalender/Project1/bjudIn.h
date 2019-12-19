@@ -10,12 +10,12 @@ namespace Project1 {
 	using namespace System::Drawing;
 
 	/// <summary>
-	/// Summary for inbjudningar
+	/// Summary for bjudIn
 	/// </summary>
-	public ref class inbjudningar : public System::Windows::Forms::Form
+	public ref class bjudIn : public System::Windows::Forms::Form
 	{
 	public:
-		inbjudningar(void)
+		bjudIn(void)
 		{
 			InitializeComponent();
 			//
@@ -27,7 +27,7 @@ namespace Project1 {
 		/// <summary>
 		/// Clean up any resources being used.
 		/// </summary>
-		~inbjudningar()
+		~bjudIn()
 		{
 			if (components)
 			{
@@ -36,6 +36,7 @@ namespace Project1 {
 		}
 	private: System::Windows::Forms::ListBox^  listBox1;
 	protected:
+	private: System::Windows::Forms::ListView^  listView1;
 	private: System::Windows::Forms::Button^  button1;
 	private: System::Windows::Forms::Button^  button2;
 
@@ -53,6 +54,7 @@ namespace Project1 {
 		void InitializeComponent(void)
 		{
 			this->listBox1 = (gcnew System::Windows::Forms::ListBox());
+			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
@@ -60,45 +62,52 @@ namespace Project1 {
 			// listBox1
 			// 
 			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Location = System::Drawing::Point(12, 35);
+			this->listBox1->Location = System::Drawing::Point(12, 44);
 			this->listBox1->Name = L"listBox1";
-			this->listBox1->Size = System::Drawing::Size(424, 17);
+			this->listBox1->Size = System::Drawing::Size(360, 17);
 			this->listBox1->TabIndex = 0;
+			// 
+			// listView1
+			// 
+			this->listView1->Location = System::Drawing::Point(35, 67);
+			this->listView1->Name = L"listView1";
+			this->listView1->Size = System::Drawing::Size(292, 53);
+			this->listView1->TabIndex = 1;
+			this->listView1->UseCompatibleStateImageBehavior = false;
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(30, 87);
+			this->button1->Location = System::Drawing::Point(35, 126);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(164, 60);
-			this->button1->TabIndex = 1;
-			this->button1->Text = L"Acceptera";
+			this->button1->Size = System::Drawing::Size(134, 42);
+			this->button1->TabIndex = 2;
+			this->button1->Text = L"Skicka";
 			this->button1->UseVisualStyleBackColor = true;
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(211, 87);
+			this->button2->Location = System::Drawing::Point(193, 126);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(164, 60);
-			this->button2->TabIndex = 2;
-			this->button2->Text = L"Ta Bort";
+			this->button2->Size = System::Drawing::Size(134, 42);
+			this->button2->TabIndex = 3;
+			this->button2->Text = L"Avbryt";
 			this->button2->UseVisualStyleBackColor = true;
 			// 
-			// inbjudningar
+			// bjudIn
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(444, 249);
+			this->ClientSize = System::Drawing::Size(384, 211);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
+			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->listBox1);
-			this->Name = L"inbjudningar";
-			this->Text = L"inbjudningar";
-			this->Load += gcnew System::EventHandler(this, &inbjudningar::inbjudningar_Load);
+			this->Name = L"bjudIn";
+			this->Text = L"bjudIn";
 			this->ResumeLayout(false);
 
 		}
 #pragma endregion
-	private: System::Void inbjudningar_Load(System::Object^  sender, System::EventArgs^  e) {
-	}
-	};
+
+};
 }

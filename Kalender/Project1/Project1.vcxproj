@@ -110,7 +110,7 @@
     <Link>
       <AdditionalDependencies>libcurl_a.lib;Ws2_32.lib;Crypt32.lib;Wldap32.lib;Normaliz.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Console</SubSystem>
-      <EntryPointSymbol>Main</EntryPointSymbol>
+      <EntryPointSymbol>Login</EntryPointSymbol>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -139,6 +139,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bjudIn.cpp" />
     <ClCompile Include="inbjudningar.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -151,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accountstuff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="bjudIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="inbjudningar.h">
@@ -185,6 +189,12 @@
     <EmbeddedResource Include="accountstuff.resx">
       <DependentUpon>accountstuff.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="bjudIn.resx">
+      <DependentUpon>bjudIn.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="inbjudningar.resx">
+      <DependentUpon>inbjudningar.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.h</DependentUpon>
     </EmbeddedResource>
@@ -205,6 +215,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="taBort.resx">
       <DependentUpon>taBort.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="taBortKonto.resx">
+      <DependentUpon>taBortKonto.h</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

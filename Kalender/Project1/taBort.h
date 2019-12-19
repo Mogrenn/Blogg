@@ -1,5 +1,6 @@
 #pragma once
 #include "curl/curl.h"
+#include "string"
 
 namespace Project1 {
 
@@ -109,7 +110,6 @@ namespace Project1 {
 					Console::Write("hej");
 				curl_easy_cleanup(curl);
 			}
-			
 		}
 		curl_global_cleanup();
 		this->Close();

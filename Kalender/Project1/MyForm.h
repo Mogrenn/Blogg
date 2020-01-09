@@ -54,6 +54,7 @@ namespace Project1 {
 
 	namespace rapidjson {
 
+
 		template<typename CharType = char>
 		struct UTF8;
 
@@ -77,7 +78,8 @@ namespace Project1 {
 
 			ret = curl_easy_perform(curl);
 			if (ret != CURLE_OK)
-				cout << "fel på begäran";
+
+				cout << "fel pÃ¥ begÃ¤ran";
 
 			cout << readBuffer;
 			curl_easy_cleanup(curl);
@@ -178,7 +180,6 @@ namespace Project1 {
 				}
 
 				insertCalenderData();
-
 
 			}
 			catch (...) {
@@ -322,6 +323,7 @@ namespace Project1 {
 			}
 		}
 
+
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
@@ -346,6 +348,7 @@ namespace Project1 {
 	private: System::Windows::Forms::MenuItem^  menuItem7;
 	private: System::Windows::Forms::MenuItem^  menuItem6;
 	private: System::Windows::Forms::MenuItem^  menuItem8;
+
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -458,7 +461,7 @@ namespace Project1 {
 			// Mandag
 			// 
 			this->Mandag->FillWeight = 108.4844F;
-			this->Mandag->HeaderText = L"Mån";
+			this->Mandag->HeaderText = L"MÃ¥n";
 			this->Mandag->Name = L"Mandag";
 			this->Mandag->ReadOnly = true;
 			this->Mandag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
@@ -499,7 +502,7 @@ namespace Project1 {
 			// Lordag
 			// 
 			this->Lordag->FillWeight = 108.4844F;
-			this->Lordag->HeaderText = L"Lör";
+			this->Lordag->HeaderText = L"LÃ¶r";
 			this->Lordag->Name = L"Lordag";
 			this->Lordag->ReadOnly = true;
 			this->Lordag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
@@ -507,7 +510,7 @@ namespace Project1 {
 			// Sondag
 			// 
 			this->Sondag->FillWeight = 108.4844F;
-			this->Sondag->HeaderText = L"Sön";
+			this->Sondag->HeaderText = L"SÃ¶n";
 			this->Sondag->Name = L"Sondag";
 			this->Sondag->ReadOnly = true;
 			this->Sondag->Resizable = System::Windows::Forms::DataGridViewTriState::False;
@@ -519,7 +522,7 @@ namespace Project1 {
 			this->button7->Name = L"button7";
 			this->button7->Size = System::Drawing::Size(184, 37);
 			this->button7->TabIndex = 33;
-			this->button7->Text = L"Föregående";
+			this->button7->Text = L"FÃ¶regÃ¥ende";
 			this->button7->UseVisualStyleBackColor = true;
 			this->button7->Click += gcnew System::EventHandler(this, &MyForm::previousMonth);
 			// 
@@ -540,7 +543,7 @@ namespace Project1 {
 			this->button9->Name = L"button9";
 			this->button9->Size = System::Drawing::Size(184, 37);
 			this->button9->TabIndex = 35;
-			this->button9->Text = L"Nästa";
+			this->button9->Text = L"NÃ¤sta";
 			this->button9->UseVisualStyleBackColor = true;
 			this->button9->Click += gcnew System::EventHandler(this, &MyForm::nextMonth);
 			// 
@@ -675,6 +678,7 @@ namespace Project1 {
 			dataGridView1->Rows->Add(i, 1);
 		}
 
+
 	}
 
 	private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
@@ -707,6 +711,7 @@ namespace Project1 {
 		curDay = 1;
 
 		curWeekDay = weekDay(1, curMonth, curYear);
+
 
 
 		insertCalenderData();
@@ -760,4 +765,5 @@ namespace Project1 {
 
 	}
 	};
+
 }

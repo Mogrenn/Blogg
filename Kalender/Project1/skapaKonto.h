@@ -171,7 +171,7 @@ namespace Project1 {
 
 			std::cout << readBuffer;
 			curl_easy_cleanup(curl);
-
+			
 			const char* json = readBuffer.c_str();
 
 			Document d;

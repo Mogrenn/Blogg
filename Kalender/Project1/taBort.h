@@ -1,5 +1,6 @@
 #pragma once
 #include "curl/curl.h"
+#include "string"
 
 namespace Project1 {
 
@@ -98,9 +99,9 @@ namespace Project1 {
 #pragma endregion
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		System::Windows::Forms::DialogResult test = MessageBox::Show("Är du säker", "dubbel koll", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
-		
+
 		if (test == System::Windows::Forms::DialogResult::Yes) {
-			
+
 			if (curl) {
 				curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Admin/funktioner/tabort.php");
 				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
@@ -109,7 +110,6 @@ namespace Project1 {
 					Console::Write("hej");
 				curl_easy_cleanup(curl);
 			}
-			
 		}
 		curl_global_cleanup();
 		this->Close();

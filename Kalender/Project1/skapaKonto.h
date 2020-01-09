@@ -15,17 +15,17 @@
 #include <curl/curl.h>
 #include <algorithm>
 #include <codecvt>
-	using namespace System;
-	using namespace System::ComponentModel;
-	using namespace System::Collections;
-	using namespace System::Windows::Forms;
-	using namespace System::Data;
-	using namespace System::Drawing;
-	using namespace rapidjson;
+using namespace System;
+using namespace System::ComponentModel;
+using namespace System::Collections;
+using namespace System::Windows::Forms;
+using namespace System::Data;
+using namespace System::Drawing;
+using namespace rapidjson;
 
 namespace Project1 {
-		
-	namespace UTF2{
+
+	namespace UTF2 {
 		inline std::size_t callback(
 			const char* in,
 			std::size_t size,
@@ -168,7 +168,7 @@ namespace Project1 {
 			ret = curl_easy_perform(curl);
 			if (ret != CURLE_OK)
 				Console::Write("fel på begäran");
-			
+
 			std::cout << readBuffer;
 			curl_easy_cleanup(curl);
 
@@ -176,18 +176,18 @@ namespace Project1 {
 
 			Document d;
 			d.Parse(json);
-
+			std::string losen = d["password"].GetString();
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);
 			const char* output = buffer.GetString();
 			std::cout << output;
-			
+
 			if (output == NULL) {
 				MessageBoxA(NULL, "fel på begäran/ upptaget användarnamn", "serversvar:", MB_OK | MB_ICONQUESTION);
 			}
 			else
-			MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
 	};

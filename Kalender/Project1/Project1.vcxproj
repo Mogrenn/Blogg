@@ -139,6 +139,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bjudIn.cpp" />
     <ClCompile Include="inbjudningar.cpp" />
     <ClCompile Include="Login.cpp" />
     <ClCompile Include="MyForm.cpp" />
@@ -151,6 +152,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="accountstuff.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="bjudIn.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="inbjudningar.h">

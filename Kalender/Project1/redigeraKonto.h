@@ -44,7 +44,7 @@ namespace Project1 {
 	public:
 		CURL *curl;
 		CURLcode ret;
-	
+
 		redigeraKonto(void)
 		{
 			InitializeComponent();
@@ -188,10 +188,10 @@ namespace Project1 {
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);
-			
+
 			const char* output = buffer.GetString();
 			std::cout << output;
-			std::string skrift = "kod: "+kod+" : "+msg;
+			std::string skrift = "kod: " + kod + " : " + msg;
 			const char* ut = skrift.c_str();
 			if (output == NULL) {
 				MessageBoxA(NULL, "Fel på begäran", "serversvar:", MB_OK | MB_ICONQUESTION);
@@ -200,5 +200,5 @@ namespace Project1 {
 				MessageBoxA(NULL, ut, "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
-};
+	};
 }

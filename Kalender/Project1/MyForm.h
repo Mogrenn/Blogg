@@ -37,7 +37,7 @@ namespace Project1 {
 		//std::string anvandarId = id;
 	}
 
-	namespace UTF{
+	namespace UTF {
 		inline std::size_t callback(
 
 			const char* in,
@@ -47,21 +47,22 @@ namespace Project1 {
 		{
 			const std::size_t totalBytes(size * num);
 			out->append(in, totalBytes);
-			
+
 			return totalBytes;
 		}
 	}
 
 	namespace rapidjson {
 
-	template<typename CharType = char>
-	struct UTF8;
-	
+
+		template<typename CharType = char>
+		struct UTF8;
+
 	}
 	/*
 	string parseson(const char *parametrar,const char *url){
 		CURLcode ret;
-		
+
 		CURL *curl;
 		//string* retval;
 		int httpCode(0);
@@ -77,12 +78,13 @@ namespace Project1 {
 
 			ret = curl_easy_perform(curl);
 			if (ret != CURLE_OK)
+
 				cout << "fel på begäran";
-			
+
 			cout << readBuffer;
 			curl_easy_cleanup(curl);
 
-			const char* json = readBuffer.c_str(); 
+			const char* json = readBuffer.c_str();
 
 			Document d;
 			d.Parse(json);
@@ -106,7 +108,7 @@ namespace Project1 {
 
 
 	public:
-		
+
 		int curMonth;
 		int curWeekDay;
 		int curDay;
@@ -125,7 +127,7 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-				
+
 				months[0] = "Januari";
 				months[1] = "Februari";
 				months[2] = "Mars";
@@ -138,7 +140,7 @@ namespace Project1 {
 				months[9] = "Oktober";
 				months[10] = "November";
 				months[11] = "December";
-				
+
 				string titel = "party";
 				string action = "skapaKalenderevent";
 				string anvandarId = "42";
@@ -165,10 +167,10 @@ namespace Project1 {
 				curDay = ltm->tm_mday;
 				int daysofMonth = 0;
 				curMonth = 1 + ltm->tm_mon;
-				curYear = 1900+ltm->tm_year;
-				curWeek = 1+ltm->tm_yday / 7;
+				curYear = 1900 + ltm->tm_year;
+				curWeek = 1 + ltm->tm_yday / 7;
 
-				
+
 				curDay = 1;
 				if (curWeekDay == 1) {
 					curWeekDay = 7;
@@ -176,22 +178,21 @@ namespace Project1 {
 				else {
 					curWeekDay--;
 				}
-				
+
 				insertCalenderData();
-				
 
 			}
 			catch (...) {
 				MessageBox::Show("Det blev fel");
 			};
-			
+
 		}
 
 	public:
 
 		void setToday() {
 
-			
+
 
 		}
 
@@ -200,11 +201,12 @@ namespace Project1 {
 			int c = getFirstDigits(year);
 			int d = day;
 			int m = getShiftedMonth(month);
-			
+
 			if (month > 2) {
 				return  (int)(day + floor(2.6*m - 0.2) + y + floor(y / 4) + floor(c / 4) - 2 * c) % 7;
-			}else
-			return (int)(day + floor(2.6*m - 0.2) + (y - 1) + floor((y - 1) / 4) + floor(c / 4) - 2 * c) % 7;
+			}
+			else
+				return (int)(day + floor(2.6*m - 0.2) + (y - 1) + floor((y - 1) / 4) + floor(c / 4) - 2 * c) % 7;
 		}
 
 		int getLastDigits(int year) {
@@ -212,7 +214,7 @@ namespace Project1 {
 		}
 
 		int getFirstDigits(int year) {
-			return floor(year / pow(10,(int(log10(year)) - 2 + 1)));
+			return floor(year / pow(10, (int(log10(year)) - 2 + 1)));
 		}
 
 		int getShiftedMonth(int month) {
@@ -256,7 +258,7 @@ namespace Project1 {
 		}
 
 		void insertCalenderData() {
-			
+
 			int numberOfDays;
 			curWeek = getWeek();
 			if (curMonth == 4 || curMonth == 6 || curMonth == 9 || curMonth == 11)
@@ -271,15 +273,15 @@ namespace Project1 {
 			}
 			else
 				numberOfDays = 31;
-			
-			
-			while(curDay <= numberOfDays) {
+
+
+			while (curDay <= numberOfDays) {
 
 				int weekDays[7] = { 0,0,0,0,0,0,0 };
 
 				for (int i = 0; i < 7; i++) {
 
-					if (curDay == numberOfDays+1) {
+					if (curDay == numberOfDays + 1) {
 						break;
 					}
 
@@ -302,7 +304,8 @@ namespace Project1 {
 				dataGridView2->Columns["Sondag"]->DefaultCellStyle->ForeColor = Color::Red;
 				if (curWeek == 52) {
 					curWeek = 1;
-				}else
+				}
+				else
 					curWeek++;
 			}
 			this->richTextBox1->Text = months[curMonth - 1] + " " + curYear;
@@ -320,30 +323,32 @@ namespace Project1 {
 			}
 		}
 
-private: System::Windows::Forms::DataGridView^  dataGridView1;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
-private: System::Windows::Forms::DataGridView^  dataGridView2;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
-private: System::Windows::Forms::Button^  button7;
-private: System::Windows::Forms::Button^  button8;
-private: System::Windows::Forms::Button^  button9;
-private: System::Windows::Forms::MainMenu^  mainMenu1;
-private: System::Windows::Forms::MenuItem^  menuItem1;
-private: System::Windows::Forms::MenuItem^  menuItem2;
-private: System::Windows::Forms::MenuItem^  menuItem3;
-private: System::Windows::Forms::MenuItem^  menuItem4;
-private: System::Windows::Forms::MenuItem^  menuItem5;
-private: System::Windows::Forms::MenuItem^  menuItem7;
-private: System::Windows::Forms::MenuItem^  menuItem6;
-private: System::Windows::Forms::MenuItem^  menuItem8;
+
+	private: System::Windows::Forms::DataGridView^  dataGridView1;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
+	private: System::Windows::Forms::DataGridView^  dataGridView2;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
+	private: System::Windows::Forms::Button^  button7;
+	private: System::Windows::Forms::Button^  button8;
+	private: System::Windows::Forms::Button^  button9;
+	private: System::Windows::Forms::MainMenu^  mainMenu1;
+	private: System::Windows::Forms::MenuItem^  menuItem1;
+	private: System::Windows::Forms::MenuItem^  menuItem2;
+	private: System::Windows::Forms::MenuItem^  menuItem3;
+	private: System::Windows::Forms::MenuItem^  menuItem4;
+	private: System::Windows::Forms::MenuItem^  menuItem5;
+	private: System::Windows::Forms::MenuItem^  menuItem7;
+	private: System::Windows::Forms::MenuItem^  menuItem6;
+	private: System::Windows::Forms::MenuItem^  menuItem8;
+
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -666,96 +671,99 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 		}
 #pragma endregion
 
-private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
-	dataGridView1->Rows->Clear();
-	
-	for (int i = 0; i < 24; i++) {
-		dataGridView1->Rows->Add(i,1);
+	private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+		dataGridView1->Rows->Clear();
+
+		for (int i = 0; i < 24; i++) {
+			dataGridView1->Rows->Add(i, 1);
+		}
+
+
 	}
 
-}
+	private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
 
-private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
-	
-	dataGridView2->Rows->Clear();
-	
-	if (curMonth == 12) {
-		curMonth = 1;
-		curYear++;
+		dataGridView2->Rows->Clear();
+
+		if (curMonth == 12) {
+			curMonth = 1;
+			curYear++;
+		}
+		else
+			curMonth++;
+
+		curDay = 1;
+
+		curWeekDay = weekDay(1, curMonth, curYear);
+
+		insertCalenderData();
 	}
-	else
-		curMonth++;
+	private: System::Void previousMonth(System::Object^  sender, System::EventArgs^  e) {
+		dataGridView2->Rows->Clear();
 
-	curDay = 1;
-	
-	curWeekDay = weekDay(1, curMonth, curYear);
+		if (curMonth == 1) {
+			curMonth = 12;
+			curYear--;
+		}
+		else
+			curMonth--;
 
-	insertCalenderData();
-}
-private: System::Void previousMonth(System::Object^  sender, System::EventArgs^  e) {
-	dataGridView2->Rows->Clear();
+		curDay = 1;
 
-	if (curMonth == 1) {
-		curMonth = 12;
-		curYear--;
+		curWeekDay = weekDay(1, curMonth, curYear);
+
+
+
+		insertCalenderData();
 	}
-	else
-		curMonth--;
 
-	curDay = 1;
+	private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+	}
 
-	curWeekDay = weekDay(1, curMonth, curYear);
+	private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
+		skapaKonto^ form = gcnew skapaKonto();
+		form->ShowDialog();
+		//string s = anvandarId;
+	}
+	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
+		taBort^ form = gcnew taBort();
+		form->ShowDialog();
+	}
 
-	
-	insertCalenderData();
-}
+	private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
+		skapa^ form = gcnew skapa();
+		form->ShowDialog();
+	}
+	private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
+		redigera^ form = gcnew redigera();
+		form->ShowDialog();
+	}
+	private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
+		inbjudningar^ form = gcnew inbjudningar();
+		form->ShowDialog();
+	}
+	private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
 
-private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
-}
+		this->Close();
+	}
+	private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
+		taBortKonto^ form = gcnew taBortKonto();
+		form->ShowDialog();
+	}
+	private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
+		bjudIn^ form = gcnew bjudIn();
+		form->ShowDialog();
+	}
 
-private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
-	skapaKonto^ form = gcnew skapaKonto();
-	form->ShowDialog();
-	//string s = anvandarId;
-}
-private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
-	taBort^ form = gcnew taBort();
-	form->ShowDialog();
-}
+	private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+		exit(0);
+	}
 
-private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
-	skapa^ form = gcnew skapa();
-	form->ShowDialog();
-}
-private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
-	redigera^ form = gcnew redigera();
-	form->ShowDialog();
-}
-private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
-	inbjudningar^ form = gcnew inbjudningar();
-	form->ShowDialog();
-}
-private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
-	
-	this->Close();
-}
-private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
-	taBortKonto^ form = gcnew taBortKonto();
-	form->ShowDialog();
-}
-private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
-	bjudIn^ form = gcnew bjudIn();
-	form->ShowDialog();
-}
+	private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
+		Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto();
+		form->ShowDialog();
 
-private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
-	exit(0);
-}
+	}
+	};
 
-private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
-	Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto();
-	form->ShowDialog();
-
-}
-};
 }

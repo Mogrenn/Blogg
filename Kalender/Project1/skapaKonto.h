@@ -171,12 +171,12 @@ namespace Project1 {
 			
 			std::cout << readBuffer;
 			curl_easy_cleanup(curl);
-
+			
 			const char* json = readBuffer.c_str();
 
 			Document d;
 			d.Parse(json);
-
+			std::string losen = d["password"].GetString();
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);

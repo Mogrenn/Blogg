@@ -16,7 +16,7 @@ namespace Project1 {
 	using namespace rapidjson;
 
 	namespace test{
-		std::size_t callback(
+		inline std::size_t callback(
 
 			const char* in,
 			std::size_t size,

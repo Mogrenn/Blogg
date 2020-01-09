@@ -38,7 +38,7 @@ namespace Project1 {
 	}
 
 	namespace UTF{
-		std::size_t callback(
+		inline std::size_t callback(
 
 			const char* in,
 			std::size_t size,

@@ -20,6 +20,7 @@
 #include "skapa.h"
 #include "iostream"
 #include "bjudIn.h"
+#include <msclr\marshal_cppstd.h>
 #define CURL_STATICLIB
 
 
@@ -33,9 +34,6 @@ namespace Project1 {
 	using namespace rapidjson;
 	using namespace std;
 
-	namespace id {
-		//std::string anvandarId = id;
-	}
 
 	namespace UTF {
 		inline std::size_t callback(
@@ -113,6 +111,7 @@ namespace Project1 {
 		int curWeekDay;
 		int curDay;
 		int curYear;
+		String^ anvandarId;
 		cli::array<String^>^ months = gcnew cli::array<String^>(12);
 
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
@@ -127,7 +126,7 @@ namespace Project1 {
 		{
 			InitializeComponent();
 			try {
-
+				
 				months[0] = "Januari";
 				months[1] = "Februari";
 				months[2] = "Mars";
@@ -140,7 +139,7 @@ namespace Project1 {
 				months[9] = "Oktober";
 				months[10] = "November";
 				months[11] = "December";
-
+				anvandarId = gcnew String(id.c_str());
 				string titel = "party";
 				string action = "skapaKalenderevent";
 				string anvandarId = "42";
@@ -723,7 +722,7 @@ namespace Project1 {
 	private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
 		skapaKonto^ form = gcnew skapaKonto();
 		form->ShowDialog();
-		//string s = anvandarId;
+		
 	}
 	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
 		taBort^ form = gcnew taBort();
@@ -760,9 +759,9 @@ namespace Project1 {
 	}
 
 	private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
-		Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto();
+		Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto(anvandarId);
 		form->ShowDialog();
-
+		//std::string id = id::anvandarId;
 	}
 	};
 

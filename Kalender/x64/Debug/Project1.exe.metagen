@@ -44,10 +44,11 @@ Class Project1.skapaKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     CURLcode ret : Public
 Class Project1.redigeraKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     Void* curl : Public
     CURLcode ret : Public
+    System.String anvandarid : Public
 Class Project1.taBortKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -65,6 +66,7 @@ Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     Int32 curWeekDay : Public
     Int32 curDay : Public
     Int32 curYear : Public
+    System.String anvandarId : Public
     System.String[] months : Public
     Int32 curWeek : Public
   Methods:

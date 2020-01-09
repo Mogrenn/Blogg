@@ -169,8 +169,6 @@ namespace Project1 {
 		if (curl) {
 			curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Login/login.php");
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, opt.c_str());
-			curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1");   // replace with your actual proxy
-			curl_easy_setopt(curl, CURLOPT_PROXYPORT, 8081L);
 			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, test::callback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 			res = curl_easy_perform(curl);

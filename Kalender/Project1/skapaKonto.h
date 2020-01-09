@@ -50,6 +50,8 @@ namespace Project1 {
 	public:
 		CURL *curl;
 	private: System::Windows::Forms::Label^  label1;
+	private: System::Windows::Forms::Label^  label2;
+	private: System::Windows::Forms::TextBox^  textBox2;
 	public:
 
 	public:
@@ -98,6 +100,8 @@ namespace Project1 {
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label1 = (gcnew System::Windows::Forms::Label());
+			this->label2 = (gcnew System::Windows::Forms::Label());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
 			this->SuspendLayout();
 			// 
 			// textBox1
@@ -116,7 +120,7 @@ namespace Project1 {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(137, 142);
+			this->button1->Location = System::Drawing::Point(135, 176);
 			this->button1->Margin = System::Windows::Forms::Padding(4);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(187, 62);
@@ -134,11 +138,29 @@ namespace Project1 {
 			this->label1->TabIndex = 4;
 			this->label1->Text = L"användarnamn";
 			// 
+			// label2
+			// 
+			this->label2->AutoSize = true;
+			this->label2->Location = System::Drawing::Point(210, 106);
+			this->label2->Name = L"label2";
+			this->label2->Size = System::Drawing::Size(63, 17);
+			this->label2->TabIndex = 5;
+			this->label2->Text = L"lösenord";
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(71, 126);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(328, 22);
+			this->textBox2->TabIndex = 6;
+			// 
 			// skapaKonto
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(8, 16);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(464, 286);
+			this->Controls->Add(this->textBox2);
+			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->textBox1);
@@ -156,8 +178,9 @@ namespace Project1 {
 		//string* retval;
 		if (curl) {
 			String^ anamn = this->textBox1->Text;
+			String^ password = this->textBox2->Text;
 			const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
-			std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&tjanst=47&rollid=6";
+			std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&tjanst=47&rollid=6&losenord="+ msclr::interop::marshal_as<std::string>(password);
 			const char *data = param.c_str();
 			curl_easy_setopt(curl, CURLOPT_URL, url);
 			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
@@ -176,7 +199,9 @@ namespace Project1 {
 
 			Document d;
 			d.Parse(json);
+			std::string anvandare = d["username"].GetString();
 			std::string losen = d["password"].GetString();
+			std::string msg = anvandare + " skapad, lösenord: " + losen;
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);
@@ -187,7 +212,7 @@ namespace Project1 {
 				MessageBoxA(NULL, "fel på begäran/ upptaget användarnamn", "serversvar:", MB_OK | MB_ICONQUESTION);
 			}
 			else
-				MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, msg.c_str(), "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
 	};

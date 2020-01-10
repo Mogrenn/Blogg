@@ -53,58 +53,20 @@ namespace Project1 {
 	
 	}
 
-	
-	/*
-	string parseson(const char *parametrar,const char *url){
-		CURLcode ret;
-		CURL *curl;
-		string* retval;
-		int httpCode(0);
-		std::string readBuffer;
-		curl = curl_easy_init();
-		if (curl) {
-			const char *data = parametrar;
-			curl_easy_setopt(curl, CURLOPT_URL, url);
-			curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
-			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, test::callback);
-			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
-
-			ret = curl_easy_perform(curl);
-			if (ret != CURLE_OK)
-				cout << "fel på begäran";
-			
-			cout << readBuffer;
-			curl_easy_cleanup(curl);
-
-			const char* json = readBuffer.c_str(); 
-
-			Document d;
-			d.Parse(json);
-
-			StringBuffer buffer;
-			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
-			d.Accept(writer);
-			const char* output = buffer.GetString();
-			std::cout << output;
-
-			return output;
-		}
-	}*/
 	/// <summary>
 	/// Summary for MyForm
 	/// </summary>
 	public ref class MyForm : public System::Windows::Forms::Form
 	{
 
-
-
-
 	public:
 		int curMonth;
 		int curWeekDay;
 		int curDay;
 		int curYear;
+		int markDay;
+		int markMonth;
+		int markYear;
 		cli::array<String^>^ months = gcnew cli::array<String^>(12);
 
 	private: System::Windows::Forms::RichTextBox^  richTextBox1;
@@ -131,44 +93,21 @@ namespace Project1 {
 				months[9] = "Oktober";
 				months[10] = "November";
 				months[11] = "December";
-				string titel = "party";
-				string action = "skapaKalenderevent";
-				string anvandarId = "42";
-				string kalenderId = "2";
-				string innehall = "vi festar hos mig med morotskaka. ta med egna servetter";
-				string start = "2019-02-01 16:00:00";
-				string slut = "2019-02-02 06:00:00";
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion="+action+"&titel=" + titel + "&anvandarId="+anvandarId+"&kalenderId="+kalenderId+"&innehall="+innehall+"&startTid="+start+"&slutTid="+slut;
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anamn=kalenderuser2&tjanst=47&rollid=6";
-				//string params = "nyckel=iRxOUsizwhoXddb4&kalendersida=1";
-				string params = "nyckel=iRxOUsizwhoXddb4&funktion=bjudin&eventID=5";
-				//string params = "nyckel=iRxOUsizwhoXddb4&funktion=skapaKalender&anvandarId="+anvandarId+"&titel=systemkalendern";
-				//const char* url = "10.130.216.101/TP/Kalender/funktioner/skapa.php";
-				//const char* url = "10.130.216.101/TP/Admin/funktioner/skapa.php";
-				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
-				//parseson(params.c_str(), url);
-				// nyckel=iRxOUsizwhoXddb4
 				time_t curday = time(0);
 				tm *ltm = localtime(&curday);
 				curWeekDay = ltm->tm_wday;
 				curDay = ltm->tm_mday;
-				int daysofMonth = 0;
 				curMonth = 1 + ltm->tm_mon;
 				curYear = 1900+ltm->tm_year;
 				curWeek = 1+ltm->tm_yday / 7;
-
-				
+				markDay = curDay;
+				markMonth = curMonth;
+				markYear = curYear;
 				curDay = 1;
-				if (curWeekDay == 1) {
-					curWeekDay = 7;
-				}
-				else {
-					curWeekDay--;
-				}
+				curWeekDay = weekDay(1, curMonth, curYear);
 				
 				insertCalenderData();
 				
-
 			}
 			catch (...) {
 				MessageBox::Show("Det blev fel");
@@ -179,9 +118,15 @@ namespace Project1 {
 	public:
 
 		void setToday() {
-
-			
-
+			time_t curday = time(0);
+			tm *ltm = localtime(&curday);
+			curWeekDay = ltm->tm_wday-1;
+			curDay = ltm->tm_mday;
+			curMonth = 1 + ltm->tm_mon;
+			curYear = 1900 + ltm->tm_year;
+			curWeek = 1 + ltm->tm_yday / 7;
+			curDay = 1;
+			insertCalenderData();
 		}
 
 		int weekDay(int day, int month, int year) {
@@ -192,8 +137,9 @@ namespace Project1 {
 			
 			if (month > 2) {
 				return  (int)(day + floor(2.6*m - 0.2) + y + floor(y / 4) + floor(c / 4) - 2 * c) % 7;
-			}else
-			return (int)(day + floor(2.6*m - 0.2) + (y - 1) + floor((y - 1) / 4) + floor(c / 4) - 2 * c) % 7;
+			}
+			else
+				return (int)(day + floor(2.6*m - 0.2) + (y - 1) + floor((y - 1) / 4) + floor(c / 4) - 2 * c) % 7;
 		}
 
 		int getLastDigits(int year) {
@@ -261,7 +207,9 @@ namespace Project1 {
 			else
 				numberOfDays = 31;
 			
-			
+			int iterationi = 1;
+			int iterationj = 0;
+			int iterationFound = false;
 			while(curDay <= numberOfDays) {
 
 				int weekDays[7] = { 0,0,0,0,0,0,0 };
@@ -280,19 +228,35 @@ namespace Project1 {
 						curDay++;
 						if (curWeekDay == 7) {
 							curWeekDay = 1;
-
 						}
 						else
 							curWeekDay++;
 					}
 
+					if (!iterationFound)
+						iterationi++;
+
+					if (curMonth == markMonth && curYear == markYear && curDay == markDay) {
+						iterationFound = true;
+					}
 				}
 				dataGridView2->Rows->Add(curWeek, weekDays[0], weekDays[1], weekDays[2], weekDays[3], weekDays[4], weekDays[5], weekDays[6]);
 				dataGridView2->Columns["Sondag"]->DefaultCellStyle->ForeColor = Color::Red;
+
+				if (iterationFound) {
+					dataGridView2->Rows[iterationj]->Cells[iterationi]->Style->BackColor = Color::Red;
+				}
+
 				if (curWeek == 52) {
 					curWeek = 1;
 				}else
 					curWeek++;
+				
+				if (!iterationFound) {
+					iterationj++;
+					iterationi = 1;
+				}
+				
 			}
 			this->richTextBox1->Text = months[curMonth - 1] + " " + curYear;
 		}
@@ -309,38 +273,10 @@ namespace Project1 {
 			}
 		}
 
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::DataGridView^  dataGridView1;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
-
-
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
 private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
@@ -544,6 +480,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 			this->button8->TabIndex = 34;
 			this->button8->Text = L"Nuvarande";
 			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &MyForm::nuvarandeDate);
 			// 
 			// button9
 			// 
@@ -690,8 +627,13 @@ private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) 
 		curMonth++;
 
 	curDay = 1;
-	
-	curWeekDay = weekDay(1, curMonth, curYear);
+	curWeekDay = weekDay(curDay, curMonth, curYear);
+	if (curWeekDay == 0) {
+		curWeekDay = 7;
+	}
+	else if (curWeekDay < 0) {
+		curWeekDay += 7;
+	}
 
 	insertCalenderData();
 }
@@ -707,8 +649,14 @@ private: System::Void previousMonth(System::Object^  sender, System::EventArgs^ 
 
 	curDay = 1;
 
-	curWeekDay = weekDay(1, curMonth, curYear);
-
+	curWeekDay = weekDay(curDay, curMonth, curYear);
+	
+	if (curWeekDay == 0) {
+		curWeekDay = 7;
+	}
+	else if (curWeekDay < 0) {
+		curWeekDay += 7;
+	}
 	
 	insertCalenderData();
 }
@@ -751,6 +699,10 @@ private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e
 }
 private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
 	exit(0);
+}
+private: System::Void nuvarandeDate(System::Object^  sender, System::EventArgs^  e) {
+	dataGridView2->Rows->Clear();
+	setToday();
 }
 };
 }

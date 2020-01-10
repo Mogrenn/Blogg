@@ -64,10 +64,11 @@ namespace Project1 {
 				Document d;
 				d.Parse(json);
 				std::string namn = d["anamn"].GetString();
-				std::cout << namn;
+				
 				return namn;
 			}
 	}
+
 	
 	/// <summary>
 	/// Summary for taBort
@@ -87,8 +88,14 @@ namespace Project1 {
 			InitializeComponent();
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
+			try{
 			namefordeletion();
-			this->listBox1->Items->Add("lelleborg" );
+			//this->listBox1->Items->Add("lelleborg" );
+			}
+			catch(...){
+				MessageBox::Show("det blev inte som det skulle");
+			};
+			
 		}
 
 	protected:

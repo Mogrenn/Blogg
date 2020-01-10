@@ -52,6 +52,7 @@ namespace Project1 {
 			InitializeComponent();
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
+			
 		}
 
 		void MarshalString(String ^ s, string& os) {
@@ -158,7 +159,7 @@ namespace Project1 {
 	public: System::Void validate(System::Object^  sender, System::EventArgs^  e) {
 
 		String^ uname = this->textBox1->Text;
-		std::string anamn = "asd";
+		std::string anamn = "";
 		MarshalString(uname, anamn);
 		String^ password = this->textBox2->Text;
 		std::string losenord = "asd";
@@ -169,7 +170,9 @@ namespace Project1 {
 		if (curl) {
 			curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Login/login.php");
 			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, opt.c_str());
-			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, test::callback);
+			//curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1");   // replace with your actual proxy
+			//curl_easy_setopt(curl, CURLOPT_PROXYPORT, 8081L);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback::callback);
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 			res = curl_easy_perform(curl);
 			if (res != CURLE_OK) {
@@ -186,6 +189,7 @@ namespace Project1 {
 						this->Hide();
 						MyForm^ form = gcnew MyForm(s);
 						form->ShowDialog();
+						
 					}
 				}
 			}

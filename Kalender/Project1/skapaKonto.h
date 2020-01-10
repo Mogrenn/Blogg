@@ -175,7 +175,7 @@ namespace Project1 {
 	private: System::Void button1_Click(System::Object^ sender, System::EventArgs^  e) {
 		int httpCode(0);
 		std::string readBuffer;
-		//string* retval;
+		
 		if (curl) {
 			String^ anamn = this->textBox1->Text;
 			String^ password = this->textBox2->Text;

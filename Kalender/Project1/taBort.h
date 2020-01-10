@@ -1,6 +1,18 @@
 #pragma once
-#include "curl/curl.h"
-#include "string"
+#include <ctime>
+#include <list>
+#include <string>
+#include <cmath>
+#include "rapidjson/document.h"
+#include "rapidjson/writer.h"
+#include "rapidjson/stringbuffer.h"
+#include <iostream>
+#include <msclr\marshal_cppstd.h>
+#include "rapidjson/encodings.h"
+#define CURL_STATICLIB
+#include <curl/curl.h>
+#include <algorithm>
+#include <codecvt>
 
 namespace Project1 {
 
@@ -10,23 +22,73 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace rapidjson;
 
+	namespace UTF4{
+		inline std::size_t callback(
+			const char* in,
+			std::size_t size,
+			std::size_t num,
+			std::string* out)
+		{
+			const std::size_t totalBytes(size * num);
+			out->append(in, totalBytes);
+
+			return totalBytes;
+		}
+	}
+	inline std::string namefordeletion(){
+			CURL *curl1;
+			CURLcode ret;
+			int httpCode(0);
+			std::string readBuffer;
+
+			if (curl1) {
+				const char* url = "10.130.216.101/TPKalender/json/kalenderjson.php";
+				std::string param = "nyckel=iRxOUsizwhoXddb4&tjanstId=47";
+				const char *data = param.c_str();
+				curl_easy_setopt(curl1, CURLOPT_URL, url);
+				curl_easy_getinfo(curl1, CURLINFO_RESPONSE_CODE, &httpCode);
+				curl_easy_setopt(curl1, CURLOPT_POSTFIELDS, data);
+				curl_easy_setopt(curl1, CURLOPT_WRITEFUNCTION, UTF4::callback);
+				curl_easy_setopt(curl1, CURLOPT_WRITEDATA, &readBuffer);
+
+				ret = curl_easy_perform(curl1);
+				if (ret != CURLE_OK)
+					Console::Write("fel på begäran");
+
+				std::cout << readBuffer;
+				curl_easy_cleanup(curl1);
+				const char* json = readBuffer.c_str();
+
+				Document d;
+				d.Parse(json);
+				std::string namn = d["anamn"].GetString();
+				std::cout << namn;
+				return namn;
+			}
+	}
+	
 	/// <summary>
 	/// Summary for taBort
 	/// </summary>
+
 	public ref class taBort : public System::Windows::Forms::Form
 	{
 
 	public:
 		CURL *curl;
+		
 		CURLcode res;
-
+		
 	public:
 		taBort(void)
 		{
 			InitializeComponent();
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
+			namefordeletion();
+			this->listBox1->Items->Add("lelleborg" );
 		}
 
 	protected:
@@ -66,7 +128,7 @@ namespace Project1 {
 			// listBox1
 			// 
 			this->listBox1->FormattingEnabled = true;
-			this->listBox1->Items->AddRange(gcnew cli::array< System::Object^  >(4) { L"Joel", L"Brandon", L"Alvar", L"Viktor" });
+			
 			this->listBox1->Location = System::Drawing::Point(35, 50);
 			this->listBox1->Name = L"listBox1";
 			this->listBox1->Size = System::Drawing::Size(211, 17);
@@ -101,15 +163,46 @@ namespace Project1 {
 		System::Windows::Forms::DialogResult test = MessageBox::Show("Är du säker", "dubbel koll", MessageBoxButtons::YesNo, MessageBoxIcon::Question);
 
 		if (test == System::Windows::Forms::DialogResult::Yes) {
-
+			int httpCode(0);
+			std::string readBuffer;
 			if (curl) {
-				curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Admin/funktioner/tabort.php");
-				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, "name=daniel&project=curl");
+				String^ choice = "this->listBox1->GetSelected()";
+				const char* url = "10.130.216.101/TP/Admin/funktioner/tabort.php";
+				std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=skapaAKonto&anvandarid="+msclr::interop::marshal_as<std::string>(choice);
+				const char *data = param.c_str();
+				curl_easy_setopt(curl, CURLOPT_URL, url);
+				curl_easy_getinfo(curl, CURLINFO_RESPONSE_CODE, &httpCode);
+				curl_easy_setopt(curl, CURLOPT_POSTFIELDS, data);
+				curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, UTF4::callback);
+				curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+
 				res = curl_easy_perform(curl);
 				if (res != CURLE_OK)
-					Console::Write("hej");
+					Console::Write("fel på begäran");
+
+				std::cout << readBuffer;
 				curl_easy_cleanup(curl);
+
+				const char* json = readBuffer.c_str();
+
+				Document d;
+				d.Parse(json);
+				std::string anvandare = d["username"].GetString();
+				std::string losen = d["password"].GetString();
+				std::string msg = anvandare + " skapad, lösenord: " + losen;
+				StringBuffer buffer;
+				Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
+				d.Accept(writer);
+				const char* output = buffer.GetString();
+				std::cout << output;
+
+				if (output == NULL) {
+					MessageBoxA(NULL, "fel på begäran/ upptaget användarnamn", "serversvar:", MB_OK | MB_ICONQUESTION);
+				}
+				else
+					MessageBoxA(NULL, msg.c_str(), "serversvar:", MB_OK | MB_ICONQUESTION);
 			}
+			
 		}
 		curl_global_cleanup();
 		this->Close();

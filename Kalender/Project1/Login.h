@@ -15,6 +15,23 @@ namespace Project1 {
 	using namespace System::Drawing;
 	using namespace rapidjson;
 
+
+	namespace test {
+
+		inline std::size_t callback(
+
+			const char* in,
+			std::size_t size,
+			std::size_t num,
+			std::string* out)
+		{
+			const std::size_t totalBytes(size * num);
+			out->append(in, totalBytes);
+
+			return totalBytes;
+		}
+	}
+
 	namespace rapidjson {
 
 		template<typename CharType = char>
@@ -159,14 +176,15 @@ namespace Project1 {
 			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
 			res = curl_easy_perform(curl);
 			if (res != CURLE_OK) {
-				MessageBox::Show("Något gick fel med curl");
+				MessageBox::Show("NÃ¥got gick fel med curl");
 			}
 			else {
 				Document doc;
 				doc.Parse(readBuffer.c_str());
 				curl_easy_cleanup(curl);
 				if (doc.IsObject()) {
-					if (doc["success"] == true) {	
+					if (doc["success"] == true) {
+
 						std::string s = doc["anvandarId"].GetString();
 						this->Hide();
 						MyForm^ form = gcnew MyForm(s);

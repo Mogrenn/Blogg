@@ -44,7 +44,7 @@ namespace Project1 {
 			std::string readBuffer;
 
 			if (curl1) {
-				const char* url = "10.130.216.101/TPKalender/json/kalenderjson.php";
+				const char* url = "10.130.216.101/TP/Kalender/json/kalenderjson.php";
 				std::string param = "nyckel=iRxOUsizwhoXddb4&tjanstId=47";
 				const char *data = param.c_str();
 				curl_easy_setopt(curl1, CURLOPT_URL, url);

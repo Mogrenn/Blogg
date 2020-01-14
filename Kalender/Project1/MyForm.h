@@ -627,135 +627,110 @@ namespace Project1 {
 
 		}
 #pragma endregion
-	private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
-		dataGridView1->Rows->Clear();
 
-		for (int i = 0; i < 24; i++) {
-			dataGridView1->Rows->Add(i, 1);
-		}
-	}
+private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
+	dataGridView1->Rows->Clear();
 
-	private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
-
-		dataGridView2->Rows->Clear();
-
-		if (curMonth == 12) {
-			curMonth = 1;
-			curYear++;
-		}
-		else
-			curMonth++;
-
-		curDay = 1;
-
-		curWeekDay = weekDay(1, curMonth, curYear);
-
-		insertCalenderData();
+	for (int i = 0; i < 24; i++) {
+		dataGridView1->Rows->Add(i, 1);
 	}
 
-	private: System::Void previousMonth(System::Object^  sender, System::EventArgs^  e) {
-		dataGridView2->Rows->Clear();
+}
 
-		if (curMonth == 1) {
-			curMonth = 12;
-			curYear--;
-		}
-		else
-			curMonth--;
+private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
 
-		curDay = 1;
-		curWeekDay = weekDay(curDay, curMonth, curYear);
-		if (curWeekDay == 0) {
-			curWeekDay = 7;
-		}
-		else if (curWeekDay < 0) {
-			curWeekDay += 7;
-		}
+	dataGridView2->Rows->Clear();
 
+	if (curMonth == 12) {
+		curMonth = 1;
+		curYear++;
+	}
+	else
+		curMonth++;
 
-
-		insertCalenderData();
+	curDay = 1;
+	curWeekDay = weekDay(curDay, curMonth, curYear);
+	if (curWeekDay == 0) {
+		curWeekDay = 7;
+	}
+	else if (curWeekDay < 0) {
+		curWeekDay += 7;
 	}
 
-	private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
-		skapaKonto^ form = gcnew skapaKonto();
-		form->ShowDialog();
+	insertCalenderData();
+}
+private: System::Void previousMonth(System::Object^  sender, System::EventArgs^  e) {
+	dataGridView2->Rows->Clear();
 
+	if (curMonth == 1) {
+		curMonth = 12;
+		curYear--;
 	}
-	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
-		taBort^ form = gcnew taBort();
-		form->ShowDialog();
-	}
+	else
+		curMonth--;
 
-	private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
-		skapa^ form = gcnew skapa();
-		form->ShowDialog();
-	}
-	private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
-		redigera^ form = gcnew redigera();
-		form->ShowDialog();
-	}
-	private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
-		inbjudningar^ form = gcnew inbjudningar();
-		form->ShowDialog();
-	}
-	private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
+	curDay = 1;
 
-		this->Close();
+	curWeekDay = weekDay(curDay, curMonth, curYear);
+
+	if (curWeekDay == 0) {
+		curWeekDay = 7;
 	}
-	private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
-		taBortKonto^ form = gcnew taBortKonto();
-		form->ShowDialog();
-	}
-	private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
-		bjudIn^ form = gcnew bjudIn();
-		form->ShowDialog();
+	else if (curWeekDay < 0) {
+		curWeekDay += 7;
 	}
 
-	private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
-		exit(0);
-	}
+	insertCalenderData();
+}
 
-	private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
-		Project1::redigeraKonto^ form = gcnew Project1::redigeraKonto(anvandarId);
-		form->ShowDialog();
-		//std::string id = id::anvandarId;
-	}
+private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
+}
 
-	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
-		taBort^ form = gcnew taBort();
-		form->ShowDialog();
-	}
-	private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
-		skapa^ form = gcnew skapa();
-		form->ShowDialog();
-	}
-	private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
-		redigera^ form = gcnew redigera();
-		form->ShowDialog();
-	}
-	private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
-		inbjudningar^ form = gcnew inbjudningar();
-		form->ShowDialog();
-	}
-	private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
+private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
+	skapaKonto^ form = gcnew skapaKonto();
+	form->ShowDialog();
 
-		this->Close();
-	}
-	private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
-		taBortKonto^ form = gcnew taBortKonto();
-		form->ShowDialog();
-	}
-	private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
-		bjudIn^ form = gcnew bjudIn();
-		form->ShowDialog();
-	}
-	private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
-		exit(0);
-	}
-	private: System::Void nuvarandeDate(System::Object^  sender, System::EventArgs^  e) {
-		dataGridView2->Rows->Clear();
-		setToday();
-	}
-	};
+}
+private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
+	taBort^ form = gcnew taBort();
+	form->ShowDialog();
+}
+private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
+	skapa^ form = gcnew skapa();
+	form->ShowDialog();
+}
+private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
+	redigera^ form = gcnew redigera();
+	form->ShowDialog();
+}
+private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
+	inbjudningar^ form = gcnew inbjudningar();
+	form->ShowDialog();
+}
+private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
+
+	this->Close();
+}
+private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
+	taBortKonto^ form = gcnew taBortKonto();
+	form->ShowDialog();
+}
+private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
+	bjudIn^ form = gcnew bjudIn();
+	form->ShowDialog();
+}
+
+private: System::Void redigeraKonton(System::Object^  sender, System::EventArgs^  e) {
+	redigeraKonto^ form = gcnew redigeraKonto(anvandarId);
+	form->ShowDialog();
+}
+
+private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+	exit(0);
+}
+private: System::Void nuvarandeDate(System::Object^  sender, System::EventArgs^  e) {
+	dataGridView2->Rows->Clear();
+	setToday();
+}
+};
 }

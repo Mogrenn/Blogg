@@ -43,6 +43,9 @@
     <ClCompile Include="redigeraKonto.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="bjudIn.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
@@ -76,6 +79,9 @@
     <ClInclude Include="redigeraKonto.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="bjudIn.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="MyForm.resx">
@@ -99,6 +105,7 @@
     <EmbeddedResource Include="redigera.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
+    <EmbeddedResource Include="redigeraKonto.resx">
     <EmbeddedResource Include="inbjudningar.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>

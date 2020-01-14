@@ -1,4 +1,6 @@
   Project1.accountstuff.resources - Embedded, ContainedInManifestFile, 
+  Project1.bjudIn.resources - Embedded, ContainedInManifestFile, 
+  Project1.inbjudningar.resources - Embedded, ContainedInManifestFile, 
   Project1.Login.resources - Embedded, ContainedInManifestFile, 
   Project1.MyForm.resources - Embedded, ContainedInManifestFile, 
   Project1.redigera.resources - Embedded, ContainedInManifestFile, 
@@ -6,6 +8,7 @@
   Project1.skapa.resources - Embedded, ContainedInManifestFile, 
   Project1.skapaKonto.resources - Embedded, ContainedInManifestFile, 
   Project1.taBort.resources - Embedded, ContainedInManifestFile, 
+  Project1.taBortKonto.resources - Embedded, ContainedInManifestFile, 
 ImageRuntimeVersion: v4.0.30319
 Assembly Project1, Version=0.0.*, Culture=Invariant Language (Invariant Country): 
 	hash=SHA1, flags=PublicKey
@@ -21,16 +24,12 @@ Assembly System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=
 	hash=None, flags=None
 Assembly System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089: 
 	hash=None, flags=None
+Class Project1.bjudIn: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
 Class Project1.inbjudningar: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class Project1.Login: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-  Fields:
-    System.String password : Public
-  Methods:
-    validate(Object, EventArgs): PrivateScope, Public, HideBySig
 Class Project1.taBort: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
@@ -45,18 +44,30 @@ Class Project1.skapaKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     CURLcode ret : Public
 Class Project1.redigeraKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+    Void .ctor(System.String): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     Void* curl : Public
     CURLcode ret : Public
-Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+    System.String anvandarid : Public
+Class Project1.taBortKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.redigera: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.skapa: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+  :System.Windows.Forms.Form
+    Void .ctor(std.basic_string<char\,std::char_traits<char>\,std::allocator<char> >*): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
   Fields:
     Int32 curMonth : Public
     Int32 curWeekDay : Public
     Int32 curDay : Public
     Int32 curYear : Public
+    System.String anvandarId : Public
+    System.String[] months : Public
     Int32 curWeek : Public
   Methods:
     setToday(): PrivateScope, Public, HideBySig
@@ -70,15 +81,13 @@ Class Project1.MyForm: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     isLeapYear(Int32): PrivateScope, Public, HideBySig
     getWeek(): PrivateScope, Public, HideBySig
     insertCalenderData(): PrivateScope, Public, HideBySig
-Class Project1.accountstuff: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
+Class Project1.Login: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
   :System.Windows.Forms.Form
     Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class Project1.redigera: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class Project1.skapa: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
-Class Project1.taBortKonto: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
-  :System.Windows.Forms.Form
-    Void .ctor(): PrivateScope, Public, HideBySig, SpecialName, RTSpecialName
+  Fields:
+    Void* curl : Public
+    CURLcode res : Public
+  Methods:
+    MarshalString(String, basic_string<wchar_t\,std::char_traits<wchar_t>\,std::allocator<wchar_t> >* IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+    MarshalString(String, basic_string<char\,std::char_traits<char>\,std::allocator<char> >* IsImplicitlyDereferenced): PrivateScope, Public, HideBySig
+    validate(Object, EventArgs): PrivateScope, Public, HideBySig

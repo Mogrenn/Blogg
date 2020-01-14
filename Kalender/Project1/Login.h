@@ -1,7 +1,9 @@
 #pragma once
-#include <stdio.h>
-#include <iostream>
-#include <msclr\marshal_cppstd.h>
+#include "MyForm.h"
+#include <curl/curl.h>
+#include <rapidjson/document.h>
+
+
 
 namespace Project1 {
 	using namespace std;
@@ -11,22 +13,65 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
-	using namespace msclr::interop;
-	
+	using namespace rapidjson;
+
+
+	namespace test {
+
+		inline std::size_t callback(
+
+			const char* in,
+			std::size_t size,
+			std::size_t num,
+			std::string* out)
+		{
+			const std::size_t totalBytes(size * num);
+			out->append(in, totalBytes);
+
+			return totalBytes;
+		}
+	}
+
+	namespace rapidjson {
+
+		template<typename CharType = char>
+		struct UTF8;
+
+	}
+
 	/// <summary>
 	/// Summary for Login
 	/// </summary>
 	public ref class Login : public System::Windows::Forms::Form
 	{
 	public:
-		System::String^ password;
+		CURL *curl;
+		CURLcode res;
 		Login(void)
 		{
 			InitializeComponent();
-			
+			curl_global_init(CURL_GLOBAL_ALL);
+			curl = curl_easy_init();
 			
 		}
-		
+
+		void MarshalString(String ^ s, string& os) {
+			using namespace Runtime::InteropServices;
+			const char* chars =
+				(const char*)(Marshal::StringToHGlobalAnsi(s)).ToPointer();
+			os = chars;
+			Marshal::FreeHGlobal(IntPtr((void*)chars));
+		}
+
+		void MarshalString(String ^ s, wstring& os) {
+			using namespace Runtime::InteropServices;
+			const wchar_t* chars =
+				(const wchar_t*)(Marshal::StringToHGlobalUni(s)).ToPointer();
+			os = chars;
+			Marshal::FreeHGlobal(IntPtr((void*)chars));
+		}
+
+
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -81,10 +126,10 @@ namespace Project1 {
 			// 
 			this->textBox2->Location = System::Drawing::Point(219, 100);
 			this->textBox2->Name = L"textBox2";
+			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(195, 20);
 			this->textBox2->TabIndex = 2;
 			this->textBox2->UseSystemPasswordChar = true;
-			this->textBox2->KeyDown += gcnew System::Windows::Forms::KeyEventHandler(this, &Login::addStar);
 			// 
 			// button1
 			// 
@@ -114,33 +159,42 @@ namespace Project1 {
 	public: System::Void validate(System::Object^  sender, System::EventArgs^  e) {
 
 		String^ uname = this->textBox1->Text;
+		std::string anamn = "";
+		MarshalString(uname, anamn);
+		String^ password = this->textBox2->Text;
+		std::string losenord = "asd";
+		MarshalString(password, losenord);
+		std::string readBuffer;
+		std::string opt = "anamn=" + anamn + "&password=" + losenord + "&tjanst=kalender";
 
-		MessageBox::Show(uname);
+		if (curl) {
+			curl_easy_setopt(curl, CURLOPT_URL, "http://10.130.216.101/TP/Login/login.php");
+			curl_easy_setopt(curl, CURLOPT_POSTFIELDS, opt.c_str());
+			//curl_easy_setopt(curl, CURLOPT_PROXY, "127.0.0.1");   // replace with your actual proxy
+			//curl_easy_setopt(curl, CURLOPT_PROXYPORT, 8081L);
+			curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, callback::callback);
+			curl_easy_setopt(curl, CURLOPT_WRITEDATA, &readBuffer);
+			res = curl_easy_perform(curl);
+			if (res != CURLE_OK) {
+				MessageBox::Show("Något gick fel med curl");
+			}
+			else {
+				Document doc;
+				doc.Parse(readBuffer.c_str());
+				curl_easy_cleanup(curl);
+				if (doc.IsObject()) {
+					if (doc["success"] == true) {
 
-	}
-		
-	
-private: System::Void addStar(System::Object^  sender, System::Windows::Forms::KeyEventArgs^  e) {
-
-	if (e->KeyCode == Keys::Back || e->KeyCode == Keys::Right || e->KeyCode == Keys::Left || e->KeyCode == Keys::Up || e->KeyCode == Keys::Down) {
-			
-	}
-	else {
-		
-		
-
-		char key = (char)e->KeyValue;
-		
-		//MessageBox::Show(L"" + char(65));
-		
-		if (key == 'A') {
-			password += key;
-			
+						std::string s = doc["anvandarId"].GetString();
+						this->Hide();
+						MyForm^ form = gcnew MyForm(s);
+						form->ShowDialog();
+						
+					}
+				}
+			}
+			curl_global_cleanup();
 		}
-		e->SuppressKeyPress = true;
-		this->textBox2->AppendText("*");
 	}
-		
-}
-};
+	};
 }

@@ -23,6 +23,8 @@ namespace Project1 {
 	using namespace System::Data;
 	using namespace System::Drawing;
 	using namespace rapidjson;
+
+
 	namespace UTF3 {
 		inline std::size_t callback(
 			const char* in,
@@ -44,14 +46,15 @@ namespace Project1 {
 	public:
 		CURL *curl;
 		CURLcode ret;
-	
-		redigeraKonto(void)
+		String^ anvandarid;
+		redigeraKonto(String^ id)
 		{
 			InitializeComponent();
+			anvandarid = id;
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
 		}
-
+		
 	protected:
 		/// <summary>
 		/// Clean up any resources being used.
@@ -156,12 +159,13 @@ namespace Project1 {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		int httpCode(0);
 		std::string readBuffer;
-		std::string anvandarid = "49"; //to be changed
+		//std::string anvandarid = msclr::interop::marshal_as<std::string>(anvandarId); //to be changed
 		if (curl) {
 			String^ anamn = this->textBox1->Text;
 			String^ losenord = this->textBox2->Text;
+			String^ anvid = anvandarid;
 			const char* url = "10.130.216.101/TP/Admin/funktioner/redigera.php";
-			std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=redigeraKonto&anvandarid=" + anvandarid + "&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&losenord=" + msclr::interop::marshal_as<std::string>(losenord);
+			std::string param = "nyckel=iRxOUsizwhoXddb4&funktion=redigeraKonto&anvandarid=" + msclr::interop::marshal_as<std::string>(anvid) + "&anamn=" + msclr::interop::marshal_as<std::string>(anamn) + "&losenord=" + msclr::interop::marshal_as<std::string>(losenord);
 
 			const char* parametrar = param.c_str();
 			const char *data = parametrar;
@@ -182,19 +186,23 @@ namespace Project1 {
 
 			Document d;
 			d.Parse(json);
-
+			std::string kod = d["code"].GetString();
+			std::string stat = d["status"].GetString();
+			std::string msg = d["msg"].GetString();
 			StringBuffer buffer;
 			Writer<StringBuffer, Document::EncodingType, UTF8<> > writer(buffer);
 			d.Accept(writer);
-			//assert(document["i"].IsNumber());
+
 			const char* output = buffer.GetString();
 			std::cout << output;
+			std::string skrift = "kod: " + kod + " : " + msg;
+			const char* ut = skrift.c_str();
 			if (output == NULL) {
-				MessageBoxA(NULL, "fEL PÅ BEGÄRAN", "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, "Fel på begäran", "serversvar:", MB_OK | MB_ICONQUESTION);
 			}
 			else
-				MessageBoxA(NULL, output, "serversvar:", MB_OK | MB_ICONQUESTION);
+				MessageBoxA(NULL, msg.c_str(), "serversvar:", MB_OK | MB_ICONQUESTION);
 		}
 	}
-};
+	};
 }

@@ -27,6 +27,7 @@ namespace Project1 {
 			InitializeComponent();
 			curl_global_init(CURL_GLOBAL_ALL);
 			curl = curl_easy_init();
+			
 		}
 
 	protected:

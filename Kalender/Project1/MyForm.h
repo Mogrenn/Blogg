@@ -106,14 +106,14 @@ namespace Project1 {
 				curWeekDay = ltm->tm_wday;
 				curDay = ltm->tm_mday;
 				curMonth = 1 + ltm->tm_mon;
-				curYear = 1900+ltm->tm_year;
-				curWeek = 1+ltm->tm_yday / 7;
+				curYear = 1900 + ltm->tm_year;
+				curWeek = 1 + ltm->tm_yday / 7;
 				markDay = curDay;
 				markMonth = curMonth;
 				markYear = curYear;
 				curDay = 1;
 				curWeekDay = weekDay(1, curMonth, curYear);
-				
+
 				insertCalenderData();
 
 			}
@@ -128,7 +128,7 @@ namespace Project1 {
 		void setToday() {
 			time_t curday = time(0);
 			tm *ltm = localtime(&curday);
-			curWeekDay = ltm->tm_wday-1;
+			curWeekDay = ltm->tm_wday - 1;
 			curDay = ltm->tm_mday;
 			curMonth = 1 + ltm->tm_mon;
 			curYear = 1900 + ltm->tm_year;
@@ -214,11 +214,11 @@ namespace Project1 {
 			}
 			else
 				numberOfDays = 31;
-			
+
 			int iterationi = 1;
 			int iterationj = 0;
 			int iterationFound = false;
-			while(curDay <= numberOfDays) {
+			while (curDay <= numberOfDays) {
 
 				int weekDays[7] = { 0,0,0,0,0,0,0 };
 
@@ -260,12 +260,12 @@ namespace Project1 {
 				}
 				else
 					curWeek++;
-				
+
 				if (!iterationFound) {
 					iterationj++;
 					iterationi = 1;
 				}
-				
+
 			}
 			this->richTextBox1->Text = months[curMonth - 1] + " " + curYear;
 		}
@@ -286,26 +286,26 @@ namespace Project1 {
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tid;
 	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Event;
 	private: System::Windows::Forms::DataGridView^  dataGridView2;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
-private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
-private: System::Windows::Forms::Button^  button7;
-private: System::Windows::Forms::Button^  button8;
-private: System::Windows::Forms::Button^  button9;
-private: System::Windows::Forms::MainMenu^  mainMenu1;
-private: System::Windows::Forms::MenuItem^  menuItem1;
-private: System::Windows::Forms::MenuItem^  menuItem2;
-private: System::Windows::Forms::MenuItem^  menuItem3;
-private: System::Windows::Forms::MenuItem^  menuItem4;
-private: System::Windows::Forms::MenuItem^  menuItem5;
-private: System::Windows::Forms::MenuItem^  menuItem7;
-private: System::Windows::Forms::MenuItem^  menuItem6;
-private: System::Windows::Forms::MenuItem^  menuItem8;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Vecka;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Mandag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Tisdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Onsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Torsdag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Fredag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Lordag;
+	private: System::Windows::Forms::DataGridViewTextBoxColumn^  Sondag;
+	private: System::Windows::Forms::Button^  button7;
+	private: System::Windows::Forms::Button^  button8;
+	private: System::Windows::Forms::Button^  button9;
+	private: System::Windows::Forms::MainMenu^  mainMenu1;
+	private: System::Windows::Forms::MenuItem^  menuItem1;
+	private: System::Windows::Forms::MenuItem^  menuItem2;
+	private: System::Windows::Forms::MenuItem^  menuItem3;
+	private: System::Windows::Forms::MenuItem^  menuItem4;
+	private: System::Windows::Forms::MenuItem^  menuItem5;
+	private: System::Windows::Forms::MenuItem^  menuItem7;
+	private: System::Windows::Forms::MenuItem^  menuItem6;
+	private: System::Windows::Forms::MenuItem^  menuItem8;
 
 	private: System::ComponentModel::IContainer^  components;
 
@@ -517,7 +517,6 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 					this->menuItem8
 			});
 			this->menuItem1->Text = L"Menu";
-			this->menuItem1->Click += gcnew System::EventHandler(this, &MyForm::menuItem1_Click);
 			// 
 			// menuItem2
 			// 
@@ -628,15 +627,12 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 
 		}
 #pragma endregion
-
 	private: System::Void selectDay(System::Object^  sender, System::Windows::Forms::DataGridViewCellEventArgs^  e) {
 		dataGridView1->Rows->Clear();
 
 		for (int i = 0; i < 24; i++) {
 			dataGridView1->Rows->Add(i, 1);
 		}
-
-
 	}
 
 	private: System::Void nextMonth(System::Object^  sender, System::EventArgs^  e) {
@@ -656,6 +652,7 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 
 		insertCalenderData();
 	}
+
 	private: System::Void previousMonth(System::Object^  sender, System::EventArgs^  e) {
 		dataGridView2->Rows->Clear();
 
@@ -665,40 +662,25 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 		}
 		else
 			curMonth--;
- 
-	curDay = 1;
-	curWeekDay = weekDay(curDay, curMonth, curYear);
-	if (curWeekDay == 0) {
-		curWeekDay = 7;
-	}
-	else if (curWeekDay < 0) {
-		curWeekDay += 7;
-	}
+
+		curDay = 1;
+		curWeekDay = weekDay(curDay, curMonth, curYear);
+		if (curWeekDay == 0) {
+			curWeekDay = 7;
+		}
+		else if (curWeekDay < 0) {
+			curWeekDay += 7;
+		}
 
 
 
 		insertCalenderData();
 	}
 
-	private: System::Void menuItem1_Click(System::Object^  sender, System::EventArgs^  e) {
-	}
-    
-	curWeekDay = weekDay(curDay, curMonth, curYear);
-	
-	if (curWeekDay == 0) {
-		curWeekDay = 7;
-	}
-	else if (curWeekDay < 0) {
-		curWeekDay += 7;
-	}
-	
-	insertCalenderData();
-}
-  
 	private: System::Void openSkapaKonto(System::Object^  sender, System::EventArgs^  e) {
 		skapaKonto^ form = gcnew skapaKonto();
 		form->ShowDialog();
-		
+
 	}
 	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
 		taBort^ form = gcnew taBort();
@@ -739,43 +721,41 @@ private: System::Windows::Forms::MenuItem^  menuItem8;
 		form->ShowDialog();
 		//std::string id = id::anvandarId;
 	}
-	};
 
-}
-private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
-	taBort^ form = gcnew taBort();
-	form->ShowDialog();
-}
-private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
-	skapa^ form = gcnew skapa();
-	form->ShowDialog();
-}
-private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
-	redigera^ form = gcnew redigera();
-	form->ShowDialog();
-}
-private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
-	inbjudningar^ form = gcnew inbjudningar();
-	form->ShowDialog();
-}
-private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
-	
-	this->Close();
-}
-private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
-	taBortKonto^ form = gcnew taBortKonto();
-	form->ShowDialog();
-}
-private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
-	bjudIn^ form = gcnew bjudIn();
-	form->ShowDialog();
-}
-private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
-	exit(0);
-}
-private: System::Void nuvarandeDate(System::Object^  sender, System::EventArgs^  e) {
-	dataGridView2->Rows->Clear();
-	setToday();
-}
-};
+	private: System::Void taBortkonto(System::Object^  sender, System::EventArgs^  e) {
+		taBort^ form = gcnew taBort();
+		form->ShowDialog();
+	}
+	private: System::Void skapaEvent(System::Object^  sender, System::EventArgs^  e) {
+		skapa^ form = gcnew skapa();
+		form->ShowDialog();
+	}
+	private: System::Void redigeraEvent(System::Object^  sender, System::EventArgs^  e) {
+		redigera^ form = gcnew redigera();
+		form->ShowDialog();
+	}
+	private: System::Void visaInbjudningar(System::Object^  sender, System::EventArgs^  e) {
+		inbjudningar^ form = gcnew inbjudningar();
+		form->ShowDialog();
+	}
+	private: System::Void exitApplikation(System::Object^  sender, System::EventArgs^  e) {
+
+		this->Close();
+	}
+	private: System::Void taBortEvent(System::Object^  sender, System::EventArgs^  e) {
+		taBortKonto^ form = gcnew taBortKonto();
+		form->ShowDialog();
+	}
+	private: System::Void bjudInEvent(System::Object^  sender, System::EventArgs^  e) {
+		bjudIn^ form = gcnew bjudIn();
+		form->ShowDialog();
+	}
+	private: System::Void shutdown(System::Object^  sender, System::Windows::Forms::FormClosedEventArgs^  e) {
+		exit(0);
+	}
+	private: System::Void nuvarandeDate(System::Object^  sender, System::EventArgs^  e) {
+		dataGridView2->Rows->Clear();
+		setToday();
+	}
+	};
 }
